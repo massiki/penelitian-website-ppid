@@ -25,7 +25,7 @@ use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\VideoController;
 
 //user
-Route::get('/',[DashboardController::class, 'home']);
+Route::get('/', [DashboardController::class, 'home']);
 Route::get('/permohonan-informasi/{permohonaninformasi}/download', [PermohonanInformasiController::class, 'download']);
 Route::get('/pengajuan-keberatan/{pengajuanKeberatan}/download', [PengajuanKeberatanController::class, 'download']);
 Route::post('/rating', [PermohonanInformasiController::class, 'rating']);
@@ -43,8 +43,11 @@ Route::get('/informasi-publik/informasi/{id}/details', [InformasiPublikControlle
 Route::get('/berita', [BeritaController::class, 'indexUser']);
 Route::get('/berita/{berita}', [BeritaController::class, 'detail']);
 
+Route::get('/contact', [ContactController::class, 'front'])->name('contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
 // guest
-Route::middleware(['guest'])->group(function() {
+Route::middleware(['guest'])->group(function () {
     Route::get('/login', [PenggunaController::class, 'login'])->name('login');
     Route::post('/login', [PenggunaController::class, 'authenticate']);
 });
@@ -135,12 +138,12 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/menu/submenu/{submenu}', [SubmenuController::class, 'update'])->middleware('role:super_admin');
 
     // image
-    Route::get('/image_video',[BackgroundImageController::class, 'index'])->middleware('role:super_admin');
-    Route::get('/image/{slug}/create',[BackgroundImageController::class, 'create'])->middleware('role:super_admin');
-    Route::post('/image',[BackgroundImageController::class, 'store'])->middleware('role:super_admin');
-    Route::get('/image/{slug}/{backgroundImage}/edit',[BackgroundImageController::class, 'edit'])->middleware('role:super_admin');
-    Route::patch('/image/{backgroundImage}',[BackgroundImageController::class, 'update'])->middleware('role:super_admin');
-    Route::delete('/image/{backgroundImage}',[BackgroundImageController::class, 'destroy'])->middleware('role:super_admin');
+    Route::get('/image_video', [BackgroundImageController::class, 'index'])->middleware('role:super_admin');
+    Route::get('/image/{slug}/create', [BackgroundImageController::class, 'create'])->middleware('role:super_admin');
+    Route::post('/image', [BackgroundImageController::class, 'store'])->middleware('role:super_admin');
+    Route::get('/image/{slug}/{backgroundImage}/edit', [BackgroundImageController::class, 'edit'])->middleware('role:super_admin');
+    Route::patch('/image/{backgroundImage}', [BackgroundImageController::class, 'update'])->middleware('role:super_admin');
+    Route::delete('/image/{backgroundImage}', [BackgroundImageController::class, 'destroy'])->middleware('role:super_admin');
 
     // video
     Route::get('/video/create', [VideoController::class, 'create'])->middleware('role:super_admin');
@@ -189,7 +192,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/news/{berita}', [BeritaController::class, 'edit'])->middleware('role:super_admin');
     Route::patch('/news/{berita}', [BeritaController::class, 'update'])->middleware('role:super_admin');
     Route::delete('/news/{berita}', [BeritaController::class, 'destroy'])->middleware('role:super_admin');
-    
+
     // informasi
     Route::get('/informasi', [InformasiController::class, 'index'])->middleware('role:super_admin');
     Route::get('/informasi/create', [InformasiController::class, 'create'])->middleware('role:super_admin');
@@ -221,6 +224,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/lokasi/{lokasi}/edit', [LokasiController::class, 'edit'])->middleware('role:super_admin');
     Route::patch('/lokasi/{lokasi}', [LokasiController::class, 'update'])->middleware('role:super_admin');
     Route::delete('/lokasi/{lokasi}', [LokasiController::class, 'destroy'])->middleware('role:super_admin');
+
+    // suggestions
+    Route::get('/suggestions', [ContactController::class, 'contactSuggestion'])->middleware('role:super_admin')->name('admin.suggestions');
 
     // logout
     Route::post('/logout', [PenggunaController::class, 'logout'])->name('logout');

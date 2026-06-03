@@ -1,0 +1,41 @@
+1. Fitur Kritik dan Saran   (clear)
+ - Halaman Hubungi Kami     (clear)
+ - Form Kritik dan Saran    (clear)
+ - customer support chat    (clear)
+2. Optimasi Loading Website
+ - Konversi gambar ke WebP
+ - Lazy Loading
+ - Cache Website
+3. Perbaikan Navigasi
+ - Menu lebih sederhana
+ - Nama menu lebih jelas
+ - Perbaikan link yang membingungkan
+4. Panduan Permohonan Informasi
+ - Alur permohonan
+ - Contoh formulir
+ - FAQ
+5. Responsif Mobile
+ - Optimasi tampilan HP
+ - Perbaikan layout mobile
+ - Prioritas 2 (Peningkatan Pengalaman Pengguna)
+6. Redesign Tampilan Website
+ - UI lebih modern
+ - Layout lebih rapi
+7. Warna dan Visual
+ - Tombol lebih kontras
+ - Warna informasi lebih menarik
+8. Konsistensi Gambar
+ - Ukuran gambar seragam
+ - Layout foto lebih rapi
+9. Animasi Website
+ - Carousel
+ - Hover Effect
+ - Scroll Animation
+ - Prioritas 3 (Pengembangan Lanjutan)
+10. Testimoni Pengguna
+ - Carousel rating
+ - Menampilkan profesi pengguna
+11. Monitoring dan Evaluasi Berkala
+ - Kuesioner berkala
+ - Analisis kebutuhan pengguna
+ - Pengembangan fitur baru

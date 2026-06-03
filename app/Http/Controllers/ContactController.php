@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Suggestion;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -13,7 +14,7 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::latest();
-        if(request('cari')){
+        if (request('cari')) {
             $contacts = $contacts->where('address', 'like', '%' . request('cari') . '%');
         }
         $contacts = $contacts->get();
@@ -33,14 +34,14 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-    $validatedData = $request->validate([
-        'address' => 'required',
-        'icon' => 'required',
-    ], $this->feedback_validate);
+        $validatedData = $request->validate([
+            'address' => 'required',
+            'icon' => 'required',
+        ], $this->feedback_validate);
 
-    Contact::create($validatedData);
+        Contact::create($validatedData);
 
-    return redirect('/kontak')->with('success', 'Kontak baru berhasil dibuat.');
+        return redirect('/kontak')->with('success', 'Kontak baru berhasil dibuat.');
     }
 
     /**
@@ -83,5 +84,30 @@ class ContactController extends Controller
     {
         $contact->delete();
         return redirect('/kontak')->with('success', 'Kontak berhasil dihapus.');
+    }
+
+    public function front()
+    {
+        return view('user.contact.index');
+    }
+
+    public function submit(Request $request)
+    {
+        $validatedData = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email'     => 'required|email:rfc,dns|max:255',
+            'phone'     => 'required|string|max:255',
+            'subject'   => 'required|string|max:255',
+            'message'   => 'required|string',
+        ], $this->feedback_validate);
+
+        Suggestion::create($validatedData);
+        return redirect()->back()->with('success', 'Pesan Anda berhasil dikirim.');
+    }
+
+    public function contactSuggestion()
+    {
+        $suggestions = Suggestion::latest('id')->paginate(10);
+        return view('admin.properties.suggestion.index', compact('suggestions'));
     }
 }
