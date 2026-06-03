@@ -10,28 +10,27 @@
   <!-- ======== Page title ============ -->
   <title>{{ config('app.name') }}</title>
   <!-- ========== Favicon Icon ========== -->
-  <link rel="shortcut icon" href="/storage/{{App\Models\BackgroundImage::where('slug','logo')->latest()->first()->image}}">
+  <link rel="shortcut icon"
+    href="/storage/{{ App\Models\BackgroundImage::where('slug', 'logo')->latest()->first()->image }}">
   <!-- ===========  All Stylesheet ================= -->
   <!--  Icon css plugins -->
-  <link rel="stylesheet" href="/assets/css/icons.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
   <!--  animate css plugins -->
-  <link rel="stylesheet" href="/assets/css/animate.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
   <!--  slick css plugins -->
-  <link rel="stylesheet" href="/assets/css/slick.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
   <!--  magnific-popup css plugins -->
-  <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
   <!-- metis menu css file -->
-  <link rel="stylesheet" href="/assets/css/metismenu.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/metismenu.css') }}">
   <!-- select2 css file -->
-  <link rel="stylesheet" href="/assets/css/nice-select2.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/nice-select2.css') }}">
   <!--  Bootstrap css plugins -->
-  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
   <!--  main style css file -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <!-- template main style css file -->
-  <link rel="stylesheet" href="/assets/css/all.css">
-
-
+  <link rel="stylesheet" href="{{ asset('assets/css/all.css') }}">
 </head>
 
 <body class="body-wrapper">
@@ -69,24 +68,29 @@
 
   @include('components.footer')
 
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/6281234567890" target="_blank" class="whatsapp-float" aria-label="Chat via WhatsApp">
+    <img src="{{ asset('assets/img/icon-whatsapp.webp') }}" alt="WhatsApp" width="60" height="60">
+  </a>
+
   <!--  ALl JS Plugins
     ====================================== -->
-  <script src="/assets/js/jquery.min.js"></script>
-  <script src="/assets/js/modernizr.min.js"></script>
-  <script src="/assets/js/jquery.easing.js"></script>
-  <script src="/assets/js/popper.min.js"></script>
-  <script src="/assets/js/bootstrap.min.js"></script>
-  <script src="/assets/js/isotope.pkgd.min.js"></script>
-  <script src="/assets/js/imageload.min.js"></script>
-  <script src="/assets/js/scrollUp.min.js"></script>
-  <script src="/assets/js/slick.min.js"></script>
-  <script src="/assets/js/slick-animation.min.js"></script>
-  <script src="/assets/js/magnific-popup.min.js"></script>
-  <script src="/assets/js/wow.min.js"></script>
-  <script src="/assets/js/metismenu.js"></script>
-  <script src="/assets/js/nice-select2.js"></script>
-  <script src="/assets/js/active.js"></script>
-  <script src="/assets/js/app.js"></script>
+  <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+  <script src="{{ asset('assets/js/modernizr.min.js') }}"></script>
+  <script src="{{ asset('assets/js/jquery.easing.js') }}"></script>
+  <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+  <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ asset('assets/js/imageload.min.js') }}"></script>
+  <script src="{{ asset('assets/js/scrollUp.min.js') }}"></script>
+  <script src="{{ asset('assets/js/slick.min.js') }}"></script>
+  <script src="{{ asset('assets/js/slick-animation.min.js') }}"></script>
+  <script src="{{ asset('assets/js/magnific-popup.min.js') }}"></script>
+  <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+  <script src="{{ asset('assets/js/metismenu.js') }}"></script>
+  <script src="{{ asset('assets/js/nice-select2.js') }}"></script>
+  <script src="{{ asset('assets/js/active.js') }}"></script>
+  <script src="{{ asset('assets/js/app.js') }}"></script>
 </body>
 
 </html>

@@ -4,7 +4,8 @@
       <div class="col-lg-3 col-sm-5 col-md-4 col-6 pr-lg-5">
         <div class="logo">
           <a href="#">
-            <img src="{{ '/storage/' . App\Models\BackgroundImage::where('slug', 'logo')->latest()->first()->image }}" alt="Logo" height="50">
+            <img src="{{ '/storage/' . App\Models\BackgroundImage::where('slug', 'logo')->latest()->first()->image }}"
+              alt="Logo" height="50">
           </a>
         </div>
       </div>
@@ -13,15 +14,18 @@
           <div class="main-menu">
             <ul>
               @foreach (App\Models\Menu::all() as $menu)
-                <li><a href="{{$menu->url}}">{{$menu->nama}}@if ( $menu->child->count() > 0 ) <i class="fas fa-angle-down"></i></a>@endif</a>
-                  @if ( $menu->child->count() > 0 )
-                    <ul class="sub-menu">
-                      @foreach ( $menu->child as $submenu )
-                        <li><a href="{{ $submenu->url }}">{{ $submenu->nama }}</a></li>
-                      @endforeach
-                    </ul>
-                  @endif
-                </li>
+                <li><a href="{{ $menu->url }}">{{ $menu->nama }}@if ($menu->child->count() > 0)
+                      <i class="fas fa-angle-down"></i></a>
+              @endif
+              </a>
+              @if ($menu->child->count() > 0)
+                <ul class="sub-menu">
+                  @foreach ($menu->child as $submenu)
+                    <li><a href="{{ $submenu->url }}">{{ $submenu->nama }}</a></li>
+                  @endforeach
+                </ul>
+              @endif
+              </li>
               @endforeach
             </ul>
           </div>
@@ -41,10 +45,11 @@
             <nav class="sidebar-nav">
               <ul class="metismenu" id="mobile-menu">
                 @foreach (App\Models\Menu::all() as $menu)
-                  <li><a @if ( $menu->child->count() > 0 )  class="has-arrow" @endif href="{{$menu->url}}">{{$menu->nama}}</a>
-                    @if ( $menu->child->count() > 0 )
+                  <li><a @if ($menu->child->count() > 0) class="has-arrow" @endif
+                      href="{{ $menu->url }}">{{ $menu->nama }}</a>
+                    @if ($menu->child->count() > 0)
                       <ul class="sub-menu">
-                        @foreach ( $menu->child as $submenu )
+                        @foreach ($menu->child as $submenu)
                           <li><a href="{{ $submenu->url }}">{{ $submenu->nama }}</a></li>
                         @endforeach
                       </ul>
@@ -53,7 +58,7 @@
                 @endforeach
               </ul>
             </nav>
-          
+
             <div class="action-bar text-white">
               <a href="/login" class="theme-btn mt-4">login</a>
             </div>

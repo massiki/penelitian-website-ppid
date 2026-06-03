@@ -11,8 +11,15 @@
 }
 
 @keyframes popIn {
-  0% { transform: scale(0.95); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .success-message img {
@@ -22,19 +29,26 @@
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .success-message h2 {
   font-size: 28px;
   font-weight: 600;
   margin: 10px 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .success-message p {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 16px;
   margin: 15px 0;
 }
@@ -52,9 +66,10 @@
 
 .success-message .btn-success:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   background: #f8f9fa;
 }
+
 /* end success */
 
 /* error */
@@ -79,11 +94,11 @@
   font-size: 28px;
   font-weight: 600;
   margin: 10px 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .error-message p {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 16px;
   margin: 15px 0;
 }
@@ -101,7 +116,28 @@
 
 .error-message .btn-danger:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   background: #f8f9fa;
 }
+
 /* end error */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+/* Perkecil ukuran tombol WhatsApp di tampilan HP */
+@media (max-width: 576px) {
+  .whatsapp-float img {
+    width: 45px !important;
+    height: 45px !important;
+  }
+}

@@ -31,6 +31,12 @@ class MenuSeeder extends Seeder
                 'url' => '#',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'nama' => 'Contact',
+                'url' => '/contact',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }
