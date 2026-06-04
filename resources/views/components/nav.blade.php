@@ -14,30 +14,48 @@
           <div class="main-menu">
             <ul>
               @foreach (App\Models\Menu::all() as $menu)
-                <li><a href="{{ $menu->url }}">{{ $menu->nama }}@if ($menu->child->count() > 0)
-                      <i class="fas fa-angle-down"></i></a>
-              @endif
-              </a>
-              @if ($menu->child->count() > 0)
-                <ul class="sub-menu">
-                  @foreach ($menu->child as $submenu)
-                    <li><a href="{{ $submenu->url }}">{{ $submenu->nama }}</a></li>
-                  @endforeach
-                </ul>
-              @endif
-              </li>
+                @php
+                  if ($menu->url === '#') {
+                      $menuActive = $menu->child->contains(fn($c) => request()->is(ltrim($c->url, '/')));
+                      if (!$menuActive && ($firstChild = $menu->child->first())) {
+                          $prefix = explode('/', ltrim($firstChild->url, '/'))[0];
+                          $menuActive = $prefix && (request()->is($prefix) || request()->is($prefix . '/*'));
+                      }
+                  } else {
+                      $menuActive = request()->is(ltrim($menu->url, '/') ?: '/');
+                  }
+                @endphp
+                <li class="{{ $menuActive ? 'active' : '' }}">
+                  <a href="{{ $menu->url }}">
+                    {{ $menu->nama }}
+                    @if ($menu->child->count() > 0)
+                      <i class="fas fa-angle-down"></i>
+                    @endif
+                  </a>
+                  @if ($menu->child->count() > 0)
+                    <ul class="sub-menu">
+                      @foreach ($menu->child as $submenu)
+                        @php
+                          $subActive = request()->is(ltrim($submenu->url, '/'));
+                        @endphp
+                        <li class="{{ $subActive ? 'active' : '' }}">
+                          <a href="{{ $submenu->url }}">{{ $submenu->nama }}</a>
+                        </li>
+                      @endforeach
+                    </ul>
+                  @endif
+                </li>
               @endforeach
             </ul>
           </div>
         </div>
         <div class="header-right-element">
-          <a href="/login" class="login-btn">Log In</a>
+          <a href="/login" class="login-btn">Login</a>
         </div>
       </div>
       <div class="d-block d-lg-none col-sm-1 col-md-8 col-6">
         <div class="mobile-nav-wrap">
           <div id="hamburger"><i class="fal fa-bars"></i></div>
-          <!-- mobile menu - responsive menu  -->
           <div class="mobile-nav">
             <button type="button" class="close-nav">
               <i class="fal fa-times-circle"></i>
@@ -45,12 +63,29 @@
             <nav class="sidebar-nav">
               <ul class="metismenu" id="mobile-menu">
                 @foreach (App\Models\Menu::all() as $menu)
-                  <li><a @if ($menu->child->count() > 0) class="has-arrow" @endif
+                  @php
+                    if ($menu->url === '#') {
+                        $menuActive = $menu->child->contains(fn($c) => request()->is(ltrim($c->url, '/')));
+                        if (!$menuActive && ($firstChild = $menu->child->first())) {
+                            $prefix = explode('/', ltrim($firstChild->url, '/'))[0];
+                            $menuActive = $prefix && (request()->is($prefix) || request()->is($prefix . '/*'));
+                        }
+                    } else {
+                        $menuActive = request()->is(ltrim($menu->url, '/') ?: '/');
+                    }
+                  @endphp
+                  <li class="{{ $menuActive ? 'active' : '' }}">
+                    <a @if ($menu->child->count() > 0) class="has-arrow" @endif
                       href="{{ $menu->url }}">{{ $menu->nama }}</a>
                     @if ($menu->child->count() > 0)
                       <ul class="sub-menu">
                         @foreach ($menu->child as $submenu)
-                          <li><a href="{{ $submenu->url }}">{{ $submenu->nama }}</a></li>
+                          @php
+                            $subActive = request()->is(ltrim($submenu->url, '/'));
+                          @endphp
+                          <li class="{{ $subActive ? 'active' : '' }}">
+                            <a href="{{ $submenu->url }}">{{ $submenu->nama }}</a>
+                          </li>
                         @endforeach
                       </ul>
                     @endif
