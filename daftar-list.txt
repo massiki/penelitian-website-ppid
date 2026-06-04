@@ -6,7 +6,7 @@
  - Konversi gambar ke WebP
  - Lazy Loading
  - Cache Website
-3. Perbaikan Navigasi                 (working)
+3. Perbaikan Navigasi                 (clear)
  - Menu lebih sederhana               (clear)
  - Nama menu lebih jelas              (clear)
  - Perbaikan link yang membingungkan  (4 link di footer harusnya akan di arahkan ke website yang berbeda)
@@ -38,6 +38,8 @@
  - Kuesioner berkala
  - Analisis kebutuhan pengguna
  - Pengembangan fitur baru
+12. Keamanan sistem                         (clear)
+ - celah data image ktp terekspo ke public  (clear)
 
  referensi
  https://ppid-simonik.bandung.go.id/

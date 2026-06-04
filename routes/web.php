@@ -66,6 +66,9 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/permohonan_informasi/{permohonanInformasi}', [PermohonanInformasiController::class, 'update'])->middleware('role:super_admin,admin');
     Route::delete('/permohonan_informasi/{permohonanInformasi}', [PermohonanInformasiController::class, 'destroy'])->middleware('role:super_admin,admin');
 
+    // show ktp
+    Route::get('/show/ktp/{id}', [PermohonanInformasiController::class, 'showKtp'])->middleware('role:super_admin,admin')->name('admin.ktp.show');
+
     // pengajuan keberatan
     Route::get('/pengajuan_keberatan', [PengajuanKeberatanController::class, 'index'])->middleware('role:super_admin,admin,operator');
     Route::get('/pengajuan_keberatan/{pengajuanKeberatan}', [PengajuanKeberatanController::class, 'show'])->middleware('role:super_admin,admin,operator');
