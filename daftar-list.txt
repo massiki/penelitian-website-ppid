@@ -6,10 +6,10 @@
  - Konversi gambar ke WebP
  - Lazy Loading
  - Cache Website
-3. Perbaikan Navigasi
- - Menu lebih sederhana
- - Nama menu lebih jelas
- - Perbaikan link yang membingungkan
+3. Perbaikan Navigasi                 (working)
+ - Menu lebih sederhana               (clear)
+ - Nama menu lebih jelas              (clear)
+ - Perbaikan link yang membingungkan  (4 link di footer harusnya akan di arahkan ke website yang berbeda)
 4. Panduan Permohonan Informasi
  - Alur permohonan
  - Contoh formulir
@@ -17,12 +17,11 @@
 5. Responsif Mobile
  - Optimasi tampilan HP
  - Perbaikan layout mobile
- - Prioritas 2 (Peningkatan Pengalaman Pengguna)
 6. Redesign Tampilan Website
  - UI lebih modern
  - Layout lebih rapi
 7. Warna dan Visual
- - Tombol lebih kontras
+ - Tombol lebih kontras           (clear)
  - Warna informasi lebih menarik
 8. Konsistensi Gambar
  - Ukuran gambar seragam
@@ -39,3 +38,6 @@
  - Kuesioner berkala
  - Analisis kebutuhan pengguna
  - Pengembangan fitur baru
+
+ referensi
+ https://ppid-simonik.bandung.go.id/
