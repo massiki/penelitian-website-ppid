@@ -260,4 +260,9 @@ class PermohonanInformasiController extends Controller
             Storage::path($permohonan->file_ktp)
         );
     }
+
+    public function guide()
+    {
+        return view('user.formulir.panduan-permohonan');
+    }
 }

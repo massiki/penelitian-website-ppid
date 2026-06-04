@@ -24,7 +24,7 @@ class PengajuanKeberatanController extends Controller
         $submission = $submission->paginate(5);
         return view('admin.menuUtama.pengajuanKeberatan.index', compact('submission'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */
@@ -49,7 +49,7 @@ class PengajuanKeberatanController extends Controller
             'alasan_pengajuan_id' => 'required',
             'tujuan_penggunaan_informasi' => 'required',
             'captcha' => 'required|captcha',
-        ],$this->feedback_validate);
+        ], $this->feedback_validate);
 
         $data = $request->except('captcha');
         PengajuanKeberatan::create($data);
@@ -97,7 +97,7 @@ class PengajuanKeberatanController extends Controller
     {
         $request->validate([
             'file_acc_pengajuan' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2048',
-        ],$this->feedback_validate);
+        ], $this->feedback_validate);
 
         $file = $request->file('file_acc_pengajuan');
         $file_org =  $file->getClientOriginalName();
@@ -134,7 +134,7 @@ class PengajuanKeberatanController extends Controller
             'alamat' => 'required|max:255',
             'alasan_pengajuan_id' => 'required',
             'tujuan_penggunaan_informasi' => 'required|max:255',
-        ],$this->feedback_validate);
+        ], $this->feedback_validate);
 
         $pengajuanKeberatan->update($data);
 
@@ -152,7 +152,12 @@ class PengajuanKeberatanController extends Controller
 
     public function download(string $id)
     {
-        $information = PengajuanKeberatan::where('id', $id)->select(['id','file_acc_pengajuan'])->first();
+        $information = PengajuanKeberatan::where('id', $id)->select(['id', 'file_acc_pengajuan'])->first();
         return view('user.download.pengajuan', compact('information'));
+    }
+
+    public function guide()
+    {
+        return view('user.formulir.panduan-pengajuan');
     }
 }
