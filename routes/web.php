@@ -37,6 +37,9 @@ Route::get('/riwayat', [PermohonanInformasiController::class, 'riwayat'])->name(
 Route::get('/pengajuan', [PengajuanKeberatanController::class, 'create']);
 Route::post('/pengajuan/create', [PengajuanKeberatanController::class, 'store']);
 
+Route::get('/panduan-permohonan', [PermohonanInformasiController::class, 'guide'])->name('panduan.permohonan');
+Route::get('/panduan-keberatan', [PengajuanKeberatanController::class, 'guide'])->name('panduan.pengajuan');
+
 Route::get('/informasi-publik/{slug}/{id}', [InformasiPublikController::class, 'information']);
 Route::get('/informasi-publik/informasi/{id}/details', [InformasiPublikController::class, 'detail']);
 
