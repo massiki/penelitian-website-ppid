@@ -27,8 +27,8 @@ class PermohonanInformasiController extends Controller
     public function index()
     {
         $information = PermohonanInformasi::latest();
-        if(request('cari')){
-            $information = $information->where('nama', 'like', '%'.request('cari').'%');
+        if (request('cari')) {
+            $information = $information->where('nama', 'like', '%' . request('cari') . '%');
         }
         $information = $information->paginate(5);
 
@@ -63,13 +63,13 @@ class PermohonanInformasiController extends Controller
             'memperoleh_informasi_id' => 'required',
             'mendapatkan_salinan_informasi_id' => 'required',
             'captcha' => 'required|captcha',
-        ],$this->feedback_validate);
+        ], $this->feedback_validate);
 
         $ktp = $request->file('file_ktp');
         $file_org =  $ktp->getClientOriginalName();
         $randomName = Str::random(5);
         $file_name = $randomName . '-' . $file_org;
-        $file_path = $ktp->storeAs('ktp', $file_name, 'public');
+        $file_path = $ktp->storeAs('ktp', $file_name, 'local');
 
         PermohonanInformasi::create(array_merge($request->except(['file_ktp', 'captcha']), ['file_ktp' => $file_path]));
 
@@ -78,7 +78,7 @@ class PermohonanInformasiController extends Controller
             'email' => $request->email
         ]);
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -99,7 +99,7 @@ class PermohonanInformasiController extends Controller
         $data = $permohonanInformasi;
         $request->validate([
             'pesan_ditolak' => 'required',
-        ],$this->feedback_validate);
+        ], $this->feedback_validate);
 
         // dd($request);
 
@@ -110,7 +110,7 @@ class PermohonanInformasiController extends Controller
 
         Mail::to($permohonanInformasi->email)->send(new NotifTolakPermohonan($data, $request));
 
-        return redirect('/permohonan_informasi/'.$permohonanInformasi->id)->with('success', 'Permohonan berhasil ditolak');
+        return redirect('/permohonan_informasi/' . $permohonanInformasi->id)->with('success', 'Permohonan berhasil ditolak');
     }
     public function accept(PermohonanInformasi $permohonanInformasi)
     {
@@ -118,14 +118,14 @@ class PermohonanInformasiController extends Controller
             'status_id' => '1',
         ]);
 
-        return redirect('/permohonan_informasi/'.$permohonanInformasi->id)->with('success', 'Permohonan berhasil diterima');
+        return redirect('/permohonan_informasi/' . $permohonanInformasi->id)->with('success', 'Permohonan berhasil diterima');
     }
 
     public function upload(Request $request, PermohonanInformasi $permohonanInformasi)
     {
         $request->validate([
             'file_acc_permohonan' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2048',
-        ],$this->feedback_validate);
+        ], $this->feedback_validate);
 
         $file = $request->file('file_acc_permohonan');
         $file_org =  $file->getClientOriginalName();
@@ -144,7 +144,7 @@ class PermohonanInformasiController extends Controller
             Mail::to($permohonanInformasi->email)->send(new NotifMengambil($data));
         }
 
-        return redirect('/permohonan_informasi/'.$permohonanInformasi->id)->with('success', 'File berhasil diupload');
+        return redirect('/permohonan_informasi/' . $permohonanInformasi->id)->with('success', 'File berhasil diupload');
     }
 
     /**
@@ -154,7 +154,7 @@ class PermohonanInformasiController extends Controller
     {
         $getInformation = Reference::where('slug', 'memperoleh')->get();
         $copyInformation = Reference::where('slug', 'mendapat')->get();
-       return view('admin.menuUtama.permohonanInformasi.edit', compact('getInformation', 'copyInformation', 'permohonanInformasi'));
+        return view('admin.menuUtama.permohonanInformasi.edit', compact('getInformation', 'copyInformation', 'permohonanInformasi'));
     }
 
     /**
@@ -174,7 +174,7 @@ class PermohonanInformasiController extends Controller
             'file_ktp' => 'file|mimes:jpg,png,jpeg,pdf|max:2048',
             'memperoleh_informasi_id' => 'required',
             'mendapatkan_salinan_informasi_id' => 'required',
-        ],$this->feedback_validate);
+        ], $this->feedback_validate);
 
         if ($request->file_ktp) {
             $ktp = $request->file('file_ktp');
@@ -211,7 +211,7 @@ class PermohonanInformasiController extends Controller
         if (request('email')) {
             $information = PermohonanInformasi::where('email', request('email'))->latest()->paginate(5);
         }
-  
+
         return view('user.formulir.riwayat-user', compact('information'));
     }
 
@@ -225,10 +225,10 @@ class PermohonanInformasiController extends Controller
         $request->validate([
             'email' => 'required|email:rfc,dns|max:255',
             'nik' => 'required|digits:16|numeric',
-        ],$this->feedback_validate);
+        ], $this->feedback_validate);
 
         if ($request->nik == $permohonanInformasi->nik && $request->email == $permohonanInformasi->email) {
-            return redirect('/permohonan-informasi/'.$permohonanInformasi->id.'/download');
+            return redirect('/permohonan-informasi/' . $permohonanInformasi->id . '/download');
         } else {
             return redirect()->back()->with('failed', 'NIK dan Email salah');
         }
@@ -236,7 +236,7 @@ class PermohonanInformasiController extends Controller
 
     public function download(string $id)
     {
-        $information = PermohonanInformasi::where('id', $id)->select(['id','file_acc_permohonan'])->first();
+        $information = PermohonanInformasi::where('id', $id)->select(['id', 'file_acc_permohonan'])->first();
         $rating = Rating::where('permohonan_informasi_id', $information->id)->first();
         return view('user.download.permohonan', compact('information', 'rating'));
     }
@@ -251,5 +251,13 @@ class PermohonanInformasiController extends Controller
         $rating->create(array_merge($request->except('id'), ['permohonan_informasi_id' => $request->id]));
 
         return redirect()->back()->with('success', 'Terima kasih atas ulasannya');
-    }    
+    }
+
+    public function showKtp(string $id)
+    {
+        $permohonan = PermohonanInformasi::findOrFail($id);
+        return response()->file(
+            Storage::path($permohonan->file_ktp)
+        );
+    }
 }

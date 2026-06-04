@@ -53,7 +53,7 @@
               </div>
               <div>
                 <h5 class="mb-0">Foto KTP</h5>
-                <img src="{{ asset('storage/' . $item->file_ktp) }}" alt="{{ $item->file_ktp }}" width="250">
+                <img src="{{ route('admin.ktp.show', $item->id) }}" alt="{{ $item->file_ktp }}" width="250">
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
                 <h5 class="mb-0">Tanggal Permohonan</h5>
                 <p>{{ $item->created_at->locale('id')->translatedFormat('H:i, l, d F Y') }}</p>
               </div>
-              @if($item->status_id == 2)
+              @if ($item->status_id == 2)
                 <div class="alert alert-warning text-uppercase text-center">Status belum dibuka</div>
               @elseif ($item->status_id == 3)
                 <div class="alert alert-primary text-uppercase text-center">Status {{ $item->status->status }}</div>
@@ -135,12 +135,13 @@
                         <div>
                           <h5 class="mb-2">File</h5>
                           <div class="input-group mb-2">
-                            <div id="iframeContainer" style="display: none;"> 
+                            <div id="iframeContainer" style="display: none;">
                               <iframe src="" frameborder="0" id="previewImage"></iframe>
                             </div>
                             <div class="input-group">
                               <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="imageInput" name="file_acc_permohonan" onchange="showIframe()">
+                                <input type="file" class="custom-file-input" id="imageInput" name="file_acc_permohonan"
+                                  onchange="showIframe()">
                                 <label class="custom-file-label" for="link">Pilih file</label>
                               </div>
                               <div class="input-group-append">
@@ -187,8 +188,8 @@
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
-                        <iframe id="pdfViewer" src="{{ asset('storage/' . $item->file_acc_permohonan) }}#toolbar=0" frameborder="0"
-                          style="width: 100%; height: 600px;"></iframe>
+                        <iframe id="pdfViewer" src="{{ asset('storage/' . $item->file_acc_permohonan) }}#toolbar=0"
+                          frameborder="0" style="width: 100%; height: 600px;"></iframe>
                       </div>
                       <!-- /.modal-content -->
                     </div>
@@ -218,7 +219,8 @@
           <div class="modal-body">
             @csrf
             @method('patch')
-            <textarea name="pesan_ditolak" id="pesan_ditolak" class="form-control mb-2" placeholder="Masukkan alasan pesan ditolak"></textarea>
+            <textarea name="pesan_ditolak" id="pesan_ditolak" class="form-control mb-2"
+              placeholder="Masukkan alasan pesan ditolak"></textarea>
             @error('pesan_ditolak')
               <div class="alert alert-danger">{{ $message }}</div>
             @enderror
