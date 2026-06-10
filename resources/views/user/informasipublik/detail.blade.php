@@ -34,7 +34,7 @@
               <td class="text-start align-middle border">{{ $item->informasi }}</td>
               <td class="align-middle border">{{ $item->tahun }}</td>
               <td class="align-middle border">
-                <a href="/storage/{{ $item->link }}" class="btn btn-info" target="_black">
+                <a href="/storage/{{ $item->link }}" class="btn btn-info" target="_blank" aria-label="Download file">
                   <i class="nav-icon fas fa-download"></i>
                 </a>
               </td>

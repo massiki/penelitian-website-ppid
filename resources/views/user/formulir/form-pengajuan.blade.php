@@ -67,9 +67,9 @@
             @csrf
             <div class="col-md-6 col-12">
               <div class="single-personal-info">
-                <label for="name">Nama Lengkap</label>
+                <label for="name">Nama Lengkap <span class="text-danger">*</span></label>
                 <input type="text" id="name" placeholder="Masukan Nama Lengkap" name="nama"
-                  value="{{ old('nama') ?? ($applicant->nama ?? '') }}">
+                  value="{{ old('nama') ?? ($applicant->nama ?? '') }}" required>
                 @error('nama')
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -77,9 +77,9 @@
             </div>
             <div class="col-md-6 col-12">
               <div class="single-personal-info">
-                <label for="email">Alamat Email</label>
+                <label for="email">Alamat Email <span class="text-danger">*</span></label>
                 <input type="email" id="email" placeholder="Masukan Alamat Email" name="email"
-                  value="{{ old('email') ?? ($applicant->email ?? '') }}">
+                  value="{{ old('email') ?? ($applicant->email ?? '') }}" required>
                 @error('email')
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -87,9 +87,9 @@
             </div>
             <div class="col-md-6 col-12">
               <div class="single-personal-info">
-                <label for="phone">No Telepon</label>
+                <label for="phone">No Telepon <span class="text-danger">*</span></label>
                 <input type="text" id="phone" placeholder="Masuk no telepon" name="no_telepon"
-                  value="{{ old('no_telepon') ?? ($applicant->no_telepon ?? '') }}" oninput="inputPhone()">
+                  value="{{ old('no_telepon') ?? ($applicant->no_telepon ?? '') }}" oninput="inputPhone()" required>
                 @error('no_telepon')
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -97,9 +97,9 @@
             </div>
             <div class="col-md-6 col-12">
               <div class="single-personal-info">
-                <label for="work">Pekerjaan</label>
+                <label for="work">Pekerjaan <span class="text-danger">*</span></label>
                 <input type="text" id="work" placeholder="Masukan Pekerjaan" name="pekerjaan"
-                  value="{{ old('pekerjaan') ?? ($applicant->pekerjaan ?? '') }}">
+                  value="{{ old('pekerjaan') ?? ($applicant->pekerjaan ?? '') }}" required>
                 @error('pekerjaan')
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -107,8 +107,8 @@
             </div>
             <div class="col-md-12 col-12">
               <div class="single-personal-info mb-0">
-                <label for="address">Alamat</label>
-                <textarea id="address" placeholder="Masukan Alamat" name="alamat">{{ old('alamat') ?? ($applicant->alamat ?? '') }}</textarea>
+                <label for="address">Alamat <span class="text-danger">*</span></label>
+                <textarea id="address" placeholder="Masukan Alamat" name="alamat" required>{{ old('alamat') ?? ($applicant->alamat ?? '') }}</textarea>
                 @error('alamat')
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -116,9 +116,9 @@
             </div>
             <div class="col-md-12 col-12">
               <div class="single-personal-info mb-5">
-                <label for="information2">Alasan Pengajuan Keberatan</label>
-                <select id="kuasa" name="alasan_pengajuan_id">
-                  <option></option>
+                <label for="information2">Alasan Pengajuan Keberatan <span class="text-danger">*</span></label>
+                <select id="kuasa" name="alasan_pengajuan_id" required>
+                  <option value="">Pilih alasan</option>
                   @foreach ($reason as $item)
                     <option value="{{ $item->id }}" {{ old('alasan_pengajuan_id') == $item->id ? 'selected' : '' }}>
                       {{ $item->nama }}
@@ -132,18 +132,17 @@
             </div>
             <div class="col-md-12 col-12">
               <div class="single-personal-info mb-0">
-                <label for="information1">Tujuan Penggunaan Informasi</label>
-                <textarea id="information1" placeholder="Masukan Tujuan Penggunaan Informasi" name="tujuan_penggunaan_informasi">{{ old('tujuan_penggunaan_informasi') }}</textarea>
+                <label for="information1">Tujuan Penggunaan Informasi <span class="text-danger">*</span></label>
+                <textarea id="information1" placeholder="Masukan Tujuan Penggunaan Informasi" name="tujuan_penggunaan_informasi" required>{{ old('tujuan_penggunaan_informasi') }}</textarea>
                 @error('tujuan_penggunaan_informasi')
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
               </div>
             </div>
             <div class="col-md-6 col-12">
-              <div class="input-group mb-3">
-                <div class="mt-2"></div>
+              <div class="input-group mb-3 captcha-wrapper">
                 <input type="text" name="captcha" class="form-control @error('captcha') is-invalid @enderror"
-                  placeholder="Please Insert Captch">
+                  placeholder="Masukkan Captcha" required>
                 <img src="{{ captcha_src('math') }}" alt="captcha">
                 @error('captcha')
                   <div class="alert alert-danger invalid-feedback">{{ $message }}</div>
@@ -151,7 +150,7 @@
               </div>
             </div>
             <div class="col-md-12 col-12 text-center">
-              <input class="submit-btn mb-5" type="submit" value="Kirim">
+              <button class="submit-btn mb-5" type="submit">Kirim</button>
             </div>
           </form>
         </div>

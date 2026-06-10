@@ -46,7 +46,7 @@
               <div class="search_widget">
                 <form action="">
                   <input type="text" name="search" placeholder="Cari Berita..." value="{{ request('search') }}">
-                  <button type="submit"><i class="fal fa-search"></i></button>
+                  <button type="submit" aria-label="Cari berita"><i class="fal fa-search"></i></button>
                 </form>
               </div>
             </div>

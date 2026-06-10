@@ -141,3 +141,146 @@
     height: 45px !important;
   }
 }
+
+/* Responsive table → card on mobile */
+@media (max-width: 767px) {
+  .table-responsive-card thead {
+    display: none;
+  }
+
+  .table-responsive-card,
+  .table-responsive-card tbody,
+  .table-responsive-card tr,
+  .table-responsive-card td {
+    display: block;
+    width: 100%;
+  }
+
+  .table-responsive-card tr {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .table-responsive-card td {
+    border: none !important;
+    padding: 8px 0 !important;
+    text-align: left !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .table-responsive-card td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #0A3D62;
+    min-width: 120px;
+    flex-shrink: 0;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .table-responsive-card td:first-child::before {
+    content: "No.";
+  }
+  .table-responsive-card td:nth-child(2)::before {
+    content: "Ringkasan Informasi";
+  }
+  .table-responsive-card td:nth-child(3)::before {
+    content: "Pejabat";
+  }
+  .table-responsive-card td:nth-child(4)::before {
+    content: "Penanggungjawab";
+  }
+  .table-responsive-card td:nth-child(5)::before {
+    content: "Cetak";
+  }
+  .table-responsive-card td:nth-child(6)::before {
+    content: "Digital";
+  }
+  .table-responsive-card td:nth-child(7)::before {
+    content: "Jangka Waktu";
+  }
+  .table-responsive-card td:nth-child(8)::before {
+    content: "Link";
+  }
+}
+
+/* Input touch target min-height */
+input,
+textarea,
+select,
+.form-control,
+.form-select {
+  min-height: 44px;
+}
+
+/* Captcha mobile layout */
+@media (max-width: 576px) {
+  .captcha-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .captcha-wrapper input {
+    width: 100% !important;
+  }
+  .captcha-wrapper img {
+    margin-top: 4px;
+  }
+}
+
+/* Submit button loading state */
+.submit-btn.loading,
+.theme-btn.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.submit-btn.loading::after,
+.theme-btn.loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .preloader {
+    display: none !important;
+  }
+  [data-animation-in] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .wow {
+    animation-name: none !important;
+    visibility: visible !important;
+  }
+}
