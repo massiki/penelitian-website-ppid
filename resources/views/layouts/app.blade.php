@@ -10,8 +10,7 @@
   <!-- ======== Page title ============ -->
   <title>{{ config('app.name') }}</title>
   <!-- ========== Favicon Icon ========== -->
-  <link rel="shortcut icon"
-    href="/storage/{{ App\Models\BackgroundImage::where('slug', 'logo')->latest()->first()->image }}">
+  <link rel="shortcut icon" href="{{ asset('storage/' . $logo->image) }}">
   <!-- ===========  All Stylesheet ================= -->
   <!--  Icon css plugins -->
   <link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
