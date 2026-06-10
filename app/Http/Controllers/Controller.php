@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+
 abstract class Controller
 {
     public $feedback_validate = [
@@ -18,4 +22,17 @@ abstract class Controller
         'unique' => ':attribute sudah terdaftar',
         'in' => ':attribute tidak valid'
     ];
+
+    public static function compressImage($file, $folder = 'image')
+    {
+        $filename = Str::uuid() . '.webp';
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($file);
+        $image->scale(width: 1200);
+        $image->save(
+            storage_path("app/public/{$folder}/{$filename}"),
+            quality: 80
+        );
+        return "{$folder}/{$filename}";
+    }
 }

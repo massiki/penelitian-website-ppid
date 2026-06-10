@@ -6,7 +6,6 @@ use App\Models\BackgroundImage;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class BackgroundImageController extends Controller
 {
@@ -38,14 +37,10 @@ class BackgroundImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|file|mimes:jpg,png,jpeg,pdf|max:2048',
+            'image' => 'required|image|mimes:jpg,png,jpeg|max:2048',
         ], $this->feedback_validate );
 
-        $image = $request->file('image');
-        $file_org =  $image->getClientOriginalName();
-        $random_name = Str::random(5);
-        $file_name = $random_name . '-' . $file_org;
-        $file_path = $image->storeAs('image', $file_name, 'public');
+        $file_path = $this->compressImage($request->file('image'), 'image');
 
         BackgroundImage::create([
             'slug' => $request->slug,
@@ -80,15 +75,11 @@ class BackgroundImageController extends Controller
     public function update(Request $request, BackgroundImage $backgroundImage)
     {
         $request->validate([
-            'image' => 'file|mimes:jpg,png,jpeg,pdf|max:2048',
+            'image' => 'image|mimes:jpg,png,jpeg|max:2048',
         ], $this->feedback_validate );
 
         if ($request->image) {
-            $image = $request->file('image');
-            $file_org =  $image->getClientOriginalName();
-            $random_name = Str::random(5);
-            $file_name = $random_name . '-' . $file_org;
-            $file_path = $image->storeAs('image', $file_name, 'public');
+            $file_path = $this->compressImage($request->file('image'), 'image');
             Storage::disk('public')->delete($backgroundImage->image);
         } else {
             $file_path = $backgroundImage->image;
