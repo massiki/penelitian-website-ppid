@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use Illuminate\Support\Facades\Cache;
 
 class MenuController extends Controller
 {
@@ -41,6 +42,7 @@ class MenuController extends Controller
 
         Menu::create($request->all());
 
+        Cache::forget('menus');
         return redirect('/menu')->with('success', 'Menu Berhasil Dibuat.');
     }
 
@@ -72,6 +74,7 @@ class MenuController extends Controller
 
         $menu->update($request->all());
 
+        Cache::forget('menus');
         return redirect('/menu')->with('success', 'Menu Berhasil Diubah.');
     }
 
@@ -84,6 +87,7 @@ class MenuController extends Controller
             return redirect('/menu')->with('failed', 'Tidak bisa dihapus, karena masih ada submenu');
         } else {
             $menu->delete();
+            Cache::forget('menus');
             return redirect('/menu')->with('success', 'Data berhasil dihapus');
         }
     }

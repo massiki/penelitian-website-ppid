@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class VideoController extends Controller
 {
@@ -36,6 +37,7 @@ class VideoController extends Controller
             'url' => $request->url
         ]);
 
+        Cache::forget('video');
         return redirect('/image_video')->with('success', 'Video berhasil ditambahkan.');
     }
 
@@ -70,6 +72,7 @@ class VideoController extends Controller
             'url' => $request->url
         ]);
 
+        Cache::forget('video');
         return redirect('/image_video')->with('success', 'Video berhasil diperbarui.');
     }
 
@@ -79,6 +82,7 @@ class VideoController extends Controller
     public function destroy(Video $video)
     {
         $video->delete();
+        Cache::forget('video');
         return redirect('/image_video')->with('success', 'Video berhasil dihapus.');
     }
 }

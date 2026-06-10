@@ -8,6 +8,8 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 abstract class Controller
 {
+    public $seconds = 60;
+
     public $feedback_validate = [
         'required' => 'Data harus diisi.',
         'max' => 'Karakter :attribute maksimal :max.',

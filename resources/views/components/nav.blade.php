@@ -4,7 +4,7 @@
       <div class="col-lg-3 col-sm-5 col-md-4 col-6 pr-lg-5">
         <div class="logo">
           <a href="#">
-            <img src="{{ '/storage/' . App\Models\BackgroundImage::where('slug', 'logo')->latest()->first()->image }}"
+            <img src="{{ '/storage/' . $logo->image }}"
               alt="Logo" height="50">
           </a>
         </div>
@@ -13,7 +13,7 @@
         <div class="menu-wrap">
           <div class="main-menu">
             <ul>
-              @foreach (App\Models\Menu::all() as $menu)
+              @foreach ($menus as $menu)
                 @php
                   if ($menu->url === '#') {
                       $menuActive = $menu->child->contains(fn($c) => request()->is(ltrim($c->url, '/')));
@@ -62,7 +62,7 @@
             </button>
             <nav class="sidebar-nav">
               <ul class="metismenu" id="mobile-menu">
-                @foreach (App\Models\Menu::all() as $menu)
+                @foreach ($menus as $menu)
                   @php
                     if ($menu->url === '#') {
                         $menuActive = $menu->child->contains(fn($c) => request()->is(ltrim($c->url, '/')));

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sosmed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SosmedController extends Controller
 {
@@ -12,11 +13,13 @@ class SosmedController extends Controller
      */
     public function index()
     {
-        $sosmeds = Sosmed::latest();
-        if(request('cari')){
-            $sosmeds = $sosmeds->where('nama', 'like', '%' . request('cari') . '%');
+        if (request('cari')) {
+            $sosmeds = Sosmed::latest()->where('nama', 'like', '%' . request('cari') . '%')->get();
+        } else {
+            $sosmeds = Cache::remember('sosmeds', $this->seconds, function () {
+                return Sosmed::latest()->get();
+            });
         }
-        $sosmeds = $sosmeds->get();
         return view('admin.properties.sosmed.index', compact('sosmeds'));
     }
 
@@ -41,6 +44,7 @@ class SosmedController extends Controller
 
     Sosmed::create($validatedData);
 
+    Cache::forget('sosmeds');
     return redirect('/sosmed')->with('success', 'Sosial media baru berhasil ditambahkan!');
     }
 
@@ -75,6 +79,7 @@ class SosmedController extends Controller
 
     $sosmed->update($validatedData);
 
+    Cache::forget('sosmeds');
     return redirect('/sosmed')->with('success', 'Sosial media berhasil diupdate!');
     }
 
@@ -84,6 +89,7 @@ class SosmedController extends Controller
     public function destroy(sosmed $sosmed)
     {
         $sosmed->delete();
+        Cache::forget('sosmeds');
         return redirect('/sosmed')->with('success', 'Sosial media berhasil dihapus!');
     }
 }

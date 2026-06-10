@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\Sosmed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
@@ -55,6 +56,8 @@ class BeritaController extends Controller
         $berita->url = '/berita/' . $berita->id;
         $berita->save();
 
+        Cache::forget('news');
+        Cache::forget('beritaPopular');
         return redirect('/news')->with('success', 'Berita berhasil ditambahkan');
     }
 
@@ -103,6 +106,8 @@ class BeritaController extends Controller
             'image' => $file_path
         ]);
 
+        Cache::forget('news');
+        Cache::forget('beritaPopular');
         return redirect('/news')->with('success', 'Berita berhasil diubah');
     }
 
@@ -116,6 +121,8 @@ class BeritaController extends Controller
             Storage::disk('public')->delete($file_name);
         }
         $berita->delete();
+        Cache::forget('news');
+        Cache::forget('beritaPopular');
         return redirect('/news')->with('success', 'Berita berhasil dihapus');
     }
 
@@ -127,9 +134,12 @@ class BeritaController extends Controller
         } else {
             $berita = Berita::latest()->paginate(5);
         }
-        // dd($berita);
-        $beritaPopular = Berita::orderBy('views', 'desc')->take(5)->get();
-        $sosmed = Sosmed::all();
+        $beritaPopular = Cache::remember('beritaPopular', $this->seconds, function () {
+            return Berita::orderBy('views', 'desc')->take(5)->get();
+        });
+        $sosmed = Cache::remember('sosmeds', $this->seconds, function () {
+            return Sosmed::all();
+        });
         return view('user.berita.index', [
             'sosmed' => $sosmed,
             'beritaPopular' => $beritaPopular,
@@ -141,8 +151,12 @@ class BeritaController extends Controller
     public function detail(Berita $berita)
     {
         $berita->increment('views');
-        $beritaPopular = Berita::orderBy('views', 'desc')->take(5)->get();
-        $sosmed = Sosmed::all();
+        $beritaPopular = Cache::remember('beritaPopular', $this->seconds, function () {
+            return Berita::orderBy('views', 'desc')->take(5)->get();
+        });
+        $sosmed = Cache::remember('sosmeds', $this->seconds, function () {
+            return Sosmed::all();
+        });
         return view('user.berita.show', [
             'item' => $berita,
             'sosmed' => $sosmed,

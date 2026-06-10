@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InfoService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class InfoServiceController extends Controller
@@ -46,6 +47,7 @@ class InfoServiceController extends Controller
 
         InfoService::create(array_merge($request->except('icon'), ['icon' => $file_path]));
 
+        Cache::forget('infoServices');
         return redirect('/info_services')->with('success', 'Data info layanan berhasil ditambahkan.');
     }
 
@@ -89,6 +91,7 @@ class InfoServiceController extends Controller
 
         $infoService->update(array_merge($request->except('icon'), ['icon' => $file_path]));
 
+        Cache::forget('infoServices');
         return redirect('/info_services')->with('success', 'Data info layanan berhasil diubah.');
     }
 
@@ -102,6 +105,7 @@ class InfoServiceController extends Controller
             Storage::disk('public')->delete($file_name);
         }
         $infoService->delete();
+        Cache::forget('infoServices');
         return redirect('/info_services')->with('success', 'Data info layanan berhasil dihapus.');
     }
 }
