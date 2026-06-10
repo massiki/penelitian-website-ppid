@@ -13,7 +13,7 @@ Version: 1.2.0
 }
 
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
 
 * {
   -webkit-box-sizing: border-box;
@@ -254,7 +254,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
   margin: 0px;
   margin-bottom: 15px;
   font-weight: 600;
@@ -3103,7 +3103,7 @@ nav .breadcrumb li {
 }
 
 .preloader .animation-preloader .txt-loading {
-  font: bold 5em "Montserrat", sans-serif, "Poppins", sans-serif;
+  font: bold 5em "Playfair Display", serif;
   text-align: center;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -3164,7 +3164,7 @@ nav .breadcrumb li {
   content: attr(data-text-preloader);
   left: 0;
   opacity: 0;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
   position: absolute;
   top: -3px;
   -webkit-transform: rotateY(-90deg);
@@ -5608,7 +5608,7 @@ header.header-3 .main-menu ul>li>ul ul {
   color: #0D0D0F;
   font-size: 24px;
   line-height: 1.4;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
   font-weight: 600;
   padding: 50px;
   margin: 30px 0px;
@@ -6190,7 +6190,7 @@ header.header-3 .main-menu ul>li>ul ul {
 .single-pricing-plan .plan-value span {
   display: block;
   font-size: 80px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
   color: #256ad7;
   line-height: 1;
   font-weight: 400;
@@ -6794,7 +6794,7 @@ header.header-3 .main-menu ul>li>ul ul {
 .single-fun-counter .count {
   font-size: 48px;
   font-weight: 700;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
   line-height: 1;
   margin-bottom: 15px;
 }
@@ -6814,7 +6814,7 @@ header.header-3 .main-menu ul>li>ul ul {
 .single-digit-count .digits {
   font-size: 40px;
   font-weight: 700;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
   margin-bottom: 10px;
 }
 
@@ -7018,7 +7018,7 @@ header.header-3 .main-menu ul>li>ul ul {
   font-weight: 600;
   -webkit-box-shadow: 0px 16px 32px 0px rgba(51, 51, 51, 0.04);
   box-shadow: 0px 16px 32px 0px rgba(51, 51, 51, 0.04);
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
   text-transform: capitalize;
   color: #0D0D0F;
   border-radius: 7px;
@@ -7152,7 +7152,7 @@ header.header-3 .main-menu ul>li>ul ul {
   color: #0D0D0F;
   position: relative;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
 }
 
 .case-info-card .project-data .single-info-item .left-data::before {
@@ -7749,7 +7749,7 @@ header.header-3 .main-menu ul>li>ul ul {
   font-size: 14px;
   line-height: 1;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
 }
 
 .single-blog-item .post-featured-thumb .post-cat a:hover {
@@ -7830,7 +7830,7 @@ header.header-3 .main-menu ul>li>ul ul {
   font-size: 14px;
   line-height: 1;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
 }
 
 .single-news-box .featured-thumb .post-cat a:hover {
@@ -8013,7 +8013,7 @@ header.header-3 .main-menu ul>li>ul ul {
   color: #0D0D0F;
   font-size: 26px;
   line-height: 1.4;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Playfair Display", serif;
   font-weight: 600;
   padding: 60px;
   text-align: center;
@@ -9224,9 +9224,9 @@ p.sticky-label {
 .contact-form .submit-btn:hover {
   background: linear-gradient(135deg, #3B82F6, #256AD7);
   -webkit-transform: translateY(-3px);
-          transform: translateY(-3px);
+  transform: translateY(-3px);
   -webkit-box-shadow: 0 8px 25px rgba(37, 106, 215, 0.35);
-          box-shadow: 0 8px 25px rgba(37, 106, 215, 0.35);
+  box-shadow: 0 8px 25px rgba(37, 106, 215, 0.35);
 }
 
 .contact-form input[type='submit'] i,
