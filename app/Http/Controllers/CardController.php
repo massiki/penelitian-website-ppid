@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class CardController extends Controller
 {
@@ -42,11 +41,7 @@ class CardController extends Controller
             'url' => 'required|max:255',
         ], $this->feedback_validate);
 
-        $icon = $request->file('icon');
-        $file_org =  $icon->getClientOriginalName();
-        $random_name = Str::random(5);
-        $file_name = $random_name . '-' . $file_org;
-        $file_path = $icon->storeAs('icons', $file_name, 'public');
+        $file_path = $this->compressImage($request->file('icon'), 'icons');
 
         Card::create(array_merge($request->except('icon'), ['icon' => $file_path]));
 
@@ -91,11 +86,7 @@ class CardController extends Controller
         ], $this->feedback_validate);
 
         if ($request->icon) {
-            $icon = $request->file('icon');
-            $file_org =  $icon->getClientOriginalName();
-            $random_name = Str::random(5);
-            $file_name = $random_name . '-' . $file_org;
-            $file_path = $icon->storeAs('icons', $file_name, 'public');
+            $file_path = $this->compressImage($request->file('icon'), 'icons');
             Storage::disk('public')->delete($card->icon);
         } else {
             $file_path = $card->icon;

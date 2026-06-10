@@ -6,7 +6,6 @@ use App\Models\Berita;
 use App\Models\Sosmed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
@@ -16,7 +15,7 @@ class BeritaController extends Controller
     public function index()
     {
         $news = Berita::latest();
-        if(request('cari')){
+        if (request('cari')) {
             $news = $news->where('judul', 'like', '%' . request('cari') . '%');
         }
         $news = $news->paginate(5);
@@ -41,13 +40,9 @@ class BeritaController extends Controller
             'deskripsi' => 'required',
             'deskripsi_detail' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
-        ], $this->feedback_validate);        
+        ], $this->feedback_validate);
 
-        $image = $request->file('image');
-        $file_org =  $image->getClientOriginalName();
-        $random_name = Str::random(5);
-        $file_name = $random_name . '-' . $file_org;
-        $file_path = $image->storeAs('image', $file_name, 'public');
+        $file_path = $this->compressImage($request->file('image'), 'image');
 
         $berita = Berita::create([
             'judul' => $request->judul,
@@ -94,11 +89,7 @@ class BeritaController extends Controller
         ], $this->feedback_validate);
 
         if ($request->image) {
-            $image = $request->file('image');
-            $file_org =  $image->getClientOriginalName();
-            $random_name = Str::random(5);
-            $file_name = $random_name . '-' . $file_org;
-            $file_path = $image->storeAs('image', $file_name, 'public');
+            $file_path = $this->compressImage($request->file('image'), 'image');
             Storage::disk('public')->delete($berita->image);
         } else {
             $file_path = $berita->image;

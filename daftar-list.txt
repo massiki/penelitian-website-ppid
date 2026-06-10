@@ -3,7 +3,7 @@
  - Form Kritik dan Saran    (clear)
  - customer support chat    (clear)
 2. Optimasi Loading Website
- - Konversi gambar ke WebP
+ - Konversi gambar ke WebP            (clear)
  - Lazy Loading
  - Cache Website
 3. Perbaikan Navigasi                 (clear)
