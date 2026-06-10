@@ -15,6 +15,7 @@ use App\Models\Rating;
 use App\Models\Reference;
 use App\Models\Video;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {
@@ -33,7 +34,7 @@ class DashboardController extends Controller
         })->when(request('month'), function ($query) {
             $query->whereMonth('created_at', request('month'));
         })->get();
-        
+
         // informasi publik
         $public = InformasiPublik::when(request('year'), function ($query) {
             $query->whereYear('created_at', request('year'));
@@ -82,7 +83,7 @@ class DashboardController extends Controller
                 $pengajuanKeberatanMonth = PengajuanKeberatan::whereMonth('created_at', $month)
                     ->whereYear('created_at', $year)
                     ->count();
-                $arrayPengajuanKeberatanMonth[$i] = $pengajuanKeberatanMonth; 
+                $arrayPengajuanKeberatanMonth[$i] = $pengajuanKeberatanMonth;
             }
         } else {
             for ($i = 1; $i <= 12; $i++) {
@@ -96,7 +97,7 @@ class DashboardController extends Controller
                 $pengajuanKeberatanMonth = PengajuanKeberatan::whereMonth('created_at', $i)
                     ->whereYear('created_at', $year)
                     ->count();
-                $arrayPengajuanKeberatanMonth[$i] = $pengajuanKeberatanMonth; 
+                $arrayPengajuanKeberatanMonth[$i] = $pengajuanKeberatanMonth;
             }
         }
 
@@ -105,7 +106,7 @@ class DashboardController extends Controller
         $referencesInfo = Reference::where('slug', 'informasi');
         $referencesInformasi = $referencesInfo->get();
         $referencesInformasiCount = $referencesInfo->count();
-        for ($i=0; $i < $referencesInformasiCount; $i++) { 
+        for ($i = 0; $i < $referencesInformasiCount; $i++) {
             $InformasiPublikCount = $public->where('kategori_informasi_id', $referencesInformasi->skip($i)->first()->id)->count();
             $arrayInformasiPublik[$i] = $InformasiPublikCount;
         }
@@ -114,9 +115,9 @@ class DashboardController extends Controller
         $referencesDapat = Reference::where('slug', 'mendapat');
         $referencesMedapat = $referencesDapat->get();
         $referencesMedapatCount = $referencesDapat->count();
-        for ($i=0; $i < $referencesMedapatCount; $i++) { 
+        for ($i = 0; $i < $referencesMedapatCount; $i++) {
             $permohonanSalinanCount = $information->where('mendapatkan_salinan_informasi_id', $referencesMedapat->skip($i)->first()->id)->count();
-            
+
             if ($information->count() > 0) {
                 $arrayPermohonanSalinan[$i] = round($permohonanSalinanCount / $information->count() * 100, 2);
             } else {
@@ -124,21 +125,57 @@ class DashboardController extends Controller
             }
         }
 
-        return view('admin.dashboard', compact('information', 'submission', 'public', 'averageRating', 'newComments', 'sendPer', 
-            'processPer', 'rejectPer', 'acceptPer', 'sendPeng', 'processPeng', 'rejectPeng', 'acceptPeng','referencesInformasi', 'arrayInformasiPublik', 
-            'referencesInformasiCount', 'arrayPermohonanInformasiMonth', 'arrayPengajuanKeberatanMonth', 'referencesMedapatCount','arrayPermohonanSalinan'));
+        return view('admin.dashboard', compact(
+            'information',
+            'submission',
+            'public',
+            'averageRating',
+            'newComments',
+            'sendPer',
+            'processPer',
+            'rejectPer',
+            'acceptPer',
+            'sendPeng',
+            'processPeng',
+            'rejectPeng',
+            'acceptPeng',
+            'referencesInformasi',
+            'arrayInformasiPublik',
+            'referencesInformasiCount',
+            'arrayPermohonanInformasiMonth',
+            'arrayPengajuanKeberatanMonth',
+            'referencesMedapatCount',
+            'arrayPermohonanSalinan'
+        ));
     }
 
     public function home()
     {
-        $ratings = Rating::where('status_post', 2)->take(6)->latest()->get();
-        $cards = Card::take(4)->latest()->get();
-        $video = Video::latest()->first();
-        $news = Berita::take(3)->latest()->get();
-        $infoServices = InfoService::take(2)->latest()->get();
-        $thumbnail = BackgroundImage::where('slug', 'thumbnail')->take(2)->get();
-        $questAnswers = BackgroundImage::where('slug', 'q&a')->first();
-        $quest = QuestAnswer::all();
+        $ratings = Cache::remember('ratings', $this->seconds, function () {
+            return Rating::where('status_post', 2)->take(6)->latest()->get();
+        });
+        $cards = Cache::remember('cards', $this->seconds, function () {
+            return Card::take(4)->latest()->get();
+        });
+        $video = Cache::remember('video', $this->seconds, function () {
+            return Video::latest()->first();
+        });
+        $news = Cache::remember('news', $this->seconds, function () {
+            return Berita::take(3)->latest()->get();
+        });
+        $infoServices = Cache::remember('infoServices', $this->seconds, function () {
+            return InfoService::take(2)->latest()->get();
+        });
+        $thumbnail = Cache::remember('thumbnail', $this->seconds, function () {
+            return BackgroundImage::where('slug', 'thumbnail')->take(2)->get();
+        });
+        $questAnswers = Cache::remember('questAnswers', $this->seconds, function () {
+            return BackgroundImage::where('slug', 'q&a')->first();
+        });
+        $quest = Cache::remember('quest', $this->seconds, function () {
+            return QuestAnswer::all();
+        });
+
         return view('user.index', compact('ratings', 'cards', 'video', 'news', 'infoServices', 'thumbnail', 'questAnswers', 'quest'));
     }
 }

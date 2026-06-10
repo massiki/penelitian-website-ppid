@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\QuestAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class QuestAnswerController extends Controller
 {
@@ -40,6 +41,7 @@ class QuestAnswerController extends Controller
 
     QuestAnswer::create($validatedData);
 
+    Cache::forget('quest');
     return redirect('/quest_answer')->with('success', 'Pertanyaan dan jawaban baru telah ditambahkan!');
     }
 
@@ -73,6 +75,7 @@ class QuestAnswerController extends Controller
 
         $questAnswer->update($validatedData);
 
+        Cache::forget('quest');
         return redirect('/quest_answer')->with('success', 'Pertanyaan dan jawaban telah diperbarui!');
     }
 
@@ -82,6 +85,7 @@ class QuestAnswerController extends Controller
     public function destroy(QuestAnswer $questAnswer)
     {
         $questAnswer->delete();
+        Cache::forget('quest');
         return redirect('/quest_answer')->with('success', 'Pertanyaan dan jawaban telah dihapus!');
     }
 }

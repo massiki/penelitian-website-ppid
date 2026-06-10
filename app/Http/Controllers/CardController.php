@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Card;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class CardController extends Controller
@@ -45,13 +46,7 @@ class CardController extends Controller
 
         Card::create(array_merge($request->except('icon'), ['icon' => $file_path]));
 
-        // Card::create([
-        //     'icon' => $file_path,
-        //     'judul' => $request->judul,
-        //     'deskripsi' => $request->deskripsi,
-        //     'url' => $request->url,
-        // ]);
-
+        Cache::forget('cards');
         return redirect('/cards')->with('success', 'Card berhasil ditambahkan!');
     }
 
@@ -94,6 +89,7 @@ class CardController extends Controller
 
         $card->update(array_merge($request->except('icon'), ['icon' => $file_path]));
 
+        Cache::forget('cards');
         return redirect('/cards')->with('success', 'Card berhasil diupdate!');
     }
 
@@ -107,6 +103,7 @@ class CardController extends Controller
             Storage::disk('public')->delete($file_name);
         }
         $card->delete();
+        Cache::forget('cards');
         return redirect('/cards')->with('success', 'Card berhasil dihapus!');
     }
 }

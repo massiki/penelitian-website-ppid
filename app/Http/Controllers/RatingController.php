@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class RatingController extends Controller
 {
@@ -25,6 +26,7 @@ class RatingController extends Controller
             'status_post' => 2
         ]);
 
+        Cache::forget('ratings');
         return redirect('/rating')->with('success', 'Komentar dipost');
     }
 
@@ -34,6 +36,7 @@ class RatingController extends Controller
             'status_post' => 0
         ]);
 
+        Cache::forget('ratings');
         return redirect('/rating')->with('success', 'Komentar tidak dipost');
     }
 }

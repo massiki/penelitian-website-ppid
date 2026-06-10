@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BackgroundImage;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class BackgroundImageController extends Controller
@@ -47,6 +48,9 @@ class BackgroundImageController extends Controller
             'image' => $file_path
         ]);
 
+        Cache::forget('thumbnail');
+        Cache::forget('questAnswers');
+        Cache::forget('logo');
         return redirect('/image_video')->with('success', ucfirst($request->slug) . ' berhasil dibuat');
     }
 
@@ -89,6 +93,9 @@ class BackgroundImageController extends Controller
             'image' => $file_path,
         ]);
 
+        Cache::forget('thumbnail');
+        Cache::forget('questAnswers');
+        Cache::forget('logo');
         return redirect('/image_video')->with('success', ucfirst($backgroundImage->slug) . ' berhasil diubah');
     }
 
@@ -102,6 +109,9 @@ class BackgroundImageController extends Controller
             Storage::disk('public')->delete($file_name);
         }
         $backgroundImage->delete();
+        Cache::forget('thumbnail');
+        Cache::forget('questAnswers');
+        Cache::forget('logo');
         return redirect('/image_video')->with('success', ucfirst($backgroundImage->slug) . ' berhasil dihapus');
     }
 }

@@ -16,6 +16,7 @@ use App\Models\Rating;
 use App\Models\Reference;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use ParagonIE\Sodium\Compat;
 
@@ -250,6 +251,7 @@ class PermohonanInformasiController extends Controller
 
         $rating->create(array_merge($request->except('id'), ['permohonan_informasi_id' => $request->id]));
 
+        Cache::forget('ratings');
         return redirect()->back()->with('success', 'Terima kasih atas ulasannya');
     }
 

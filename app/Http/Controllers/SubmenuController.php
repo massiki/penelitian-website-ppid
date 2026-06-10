@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Submenu;
 use App\Models\Menu;
+use Illuminate\Support\Facades\Cache;
 
 class SubmenuController extends Controller
 {
@@ -46,6 +47,7 @@ class SubmenuController extends Controller
 
         Submenu::create($request->all());
 
+        Cache::forget('menus');
         return redirect('/menu/submenu/' . $request->menu_id)->with('success', 'Sub Menu Berhasil Dibuat.');
     }
 
@@ -79,6 +81,7 @@ class SubmenuController extends Controller
 
         $submenu->update(array_merge($request->all(), ['menu_id' => $submenu->menu_id]));
 
+        Cache::forget('menus');
         return redirect('/menu/submenu/' . $submenu->menu_id)->with('success', 'Sub Menu Berhasil Diubah.');
     }
 
@@ -88,6 +91,7 @@ class SubmenuController extends Controller
     public function destroy(Submenu $submenu)
     {
         $submenu->delete();
+        Cache::forget('menus');
         return redirect('/menu/submenu/' . $submenu->menu_id)->with('success', 'Data berhasil dihapus');
     }
 }
