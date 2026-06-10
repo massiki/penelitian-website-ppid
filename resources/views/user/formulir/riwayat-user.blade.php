@@ -14,7 +14,7 @@
         <div class="search_widget">
           <form action="{{ route('riwayat') }}" method="get">
             <input type="email" name="email" placeholder="Masukan Email ..." value="{{ request('email') }}">
-            <button type="submit"><i class="fal fa-search"></i></button>
+            <button type="submit" aria-label="Cari permohonan"><i class="fal fa-search"></i></button>
           </form>
         </div>
       </div>

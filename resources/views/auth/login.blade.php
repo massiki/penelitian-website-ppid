@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,9 +46,8 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <div class="mt-2"></div>
-          <input type="text" name="captcha" class="form-control @error('captcha') is-invalid @enderror" placeholder="Please Insert Captch">
+        <div class="input-group mb-3 captcha-wrapper">
+          <input type="text" name="captcha" class="form-control @error('captcha') is-invalid @enderror" placeholder="Masukkan Captcha">
           <img src="{{ captcha_src('math') }}" alt="captcha">
           @error('captcha') 
             <div class="invalid-feedback">{{ $message }}</div>
@@ -78,5 +77,11 @@
 <!-- AdminLTE App -->
 <script src="/dist/js/adminlte.min.js"></script>
 <script src="/dist/js/app.js"></script>
+<script>
+  document.querySelector('form').addEventListener('submit', function() {
+    var btn = this.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.innerHTML = 'Loading...'; }
+  });
+</script>
 </body>
 </html>

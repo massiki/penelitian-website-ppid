@@ -34,7 +34,7 @@
         <div class="col-xl-6 col-12">
           <div class="about-images-video-popup mb-5 mb-md-0">
             @foreach ($thumbnail as $index => $item)
-              <img src="/storage/{{ $item->image }}" alt="{{ $item->image }}" width="{{ $index == 0 ? '600' : '380' }}">
+              <img src="/storage/{{ $item->image }}" alt="{{ $item->image }}" class="about-img-{{ $index === 0 ? 'main' : 'overlay' }}">
             @endforeach
             <div class="video-play-btn">
               <a href="{{ $video->url }}" class="popup-video play-video"><i

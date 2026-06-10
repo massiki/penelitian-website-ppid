@@ -57,7 +57,7 @@
         <div class="mobile-nav-wrap">
           <div id="hamburger"><i class="fal fa-bars"></i></div>
           <div class="mobile-nav">
-            <button type="button" class="close-nav">
+            <button type="button" class="close-nav" aria-label="Tutup menu">
               <i class="fal fa-times-circle"></i>
             </button>
             <nav class="sidebar-nav">
