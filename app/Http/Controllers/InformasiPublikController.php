@@ -7,6 +7,7 @@ use App\Models\InformasiPublik;
 use App\Models\InformasiPublikDetail;
 use App\Models\KategoriInformasi;
 use App\Models\Reference;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,7 +50,7 @@ class InformasiPublikController extends Controller
             'bentuk_informasi_digital' => 'required|max:255',
             'waktu_penyimpanan_id' => 'required',
             'kategori_informasi_id' => 'required',
-        ], $this->feedback_validate );
+        ], $this->feedback_validate);
 
         InformasiPublik::create($request->all());
 
@@ -71,7 +72,7 @@ class InformasiPublikController extends Controller
     {
         $categories = Reference::where('slug', 'informasi')->get();
         $storages = Reference::where('slug', 'penyimpanan')->get();
-        return view('admin.menuUtama.informasiPublik.edit', compact(['informasiPublik','categories', 'storages']));
+        return view('admin.menuUtama.informasiPublik.edit', compact(['informasiPublik', 'categories', 'storages']));
     }
 
     /**
@@ -87,7 +88,7 @@ class InformasiPublikController extends Controller
             'bentuk_informasi_digital' => 'required|max:255',
             'waktu_penyimpanan_id' => 'required',
             'kategori_informasi_id' => 'required',
-        ], $this->feedback_validate );
+        ], $this->feedback_validate);
 
         $informasiPublik->update($request->all());
 
@@ -99,11 +100,11 @@ class InformasiPublikController extends Controller
      */
     public function destroy(InformasiPublik $informasiPublik)
     {
-        if($informasiPublik->infopubdet->count() > 0){
+        if ($informasiPublik->infopubdet->count() > 0) {
             return redirect('/informasi_publik')->with('failed', 'Tidak bisa dihapus, karena masih ada informasi publik detail');
         } else {
             $informasiPublik->delete();
-        return redirect('/informasi_publik')->with('success', 'Data berhasil dihapus');
+            return redirect('/informasi_publik')->with('success', 'Data berhasil dihapus');
         }
     }
 
@@ -114,15 +115,29 @@ class InformasiPublikController extends Controller
         if (!$reference) {
             return redirect()->back();
         }
-        
-        $informations = InformasiPublik::where('kategori_informasi_id', $reference->id)->latest()->paginate(10);
+
+        $informations = Cache::remember(
+            "information_{$reference->id}_page_" . (request('page', 1)),
+            $this->seconds ?? 60,
+            function () use ($reference) {
+                return InformasiPublik::where('kategori_informasi_id', $reference->id)
+                    ->latest()
+                    ->paginate(10);
+            }
+        );
+
         return view('user.informasipublik.index', compact('informations', 'slug'));
     }
 
     public function detail(string $id)
     {
-        $information = InformasiPublik::find($id);
-        $details = InformasiPublikDetail::where('informasi_publik_id', $id)->latest()->paginate(10);
+        $information = Cache::remember("informasi_publik_{$id}", 60, function () use ($id) {
+            return InformasiPublik::find($id);
+        });
+
+        $details = Cache::remember("informasi_publik_detail_{$id}_page_" . (request('page', 1)), 60, function () use ($id) {
+            return InformasiPublikDetail::where('informasi_publik_id', $id)->latest()->paginate(10);
+        });
         return view('user.informasipublik.detail', compact(['details', 'information']));
     }
 }

@@ -1,6 +1,15 @@
+@php
+  $backgroundImages = Illuminate\Support\Facades\Cache::remember('backgorundImages', 60, function () {
+      return App\Models\BackgroundImage::where('slug', 'banner')->take(3)->latest()->get();
+  });
+  $infoBanner = Illuminate\Support\Facades\Cache::remember('infoBanner', 60, function () {
+      return App\Models\InfoBanner::latest()->first();
+  });
+@endphp
+
 <section class="hero-wrapper hero-1 text-center text-md-start">
   <div class="hero-slider-active">
-    @foreach (App\Models\BackgroundImage::where('slug', 'banner')->take(3)->latest()->get() as $item)
+    @foreach ($backgroundImages as $item)
       <div class="single-slide">
         <div class="slide-bg bg-cover wow zoomIn" style="background-image: url('/storage/{{ $item->image }}' );">
         </div>
@@ -8,9 +17,6 @@
           <div class="row">
             <div class="col-12 col-xxl-8 col-lg-9 col-sm-10">
               <div class="hero-contents pe-lg-3 text-white">
-                @php
-                  $infoBanner = App\Models\InfoBanner::latest()->first();
-                @endphp
                 <h1 class="fs-lg animated" style="text-shadow: 2px 2px 5px black" data-animation-in="fadeInRight"
                   data-delay-in="0.3">{!! $infoBanner->judul !!}
                 </h1>
