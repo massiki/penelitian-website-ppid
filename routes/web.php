@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BackgroundImageController;
@@ -23,6 +23,7 @@ use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\SosmedController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\PanduanController;
 
 //user
 Route::get('/', [DashboardController::class, 'home']);
@@ -230,6 +231,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/lokasi/{lokasi}/edit', [LokasiController::class, 'edit'])->middleware('role:super_admin');
     Route::patch('/lokasi/{lokasi}', [LokasiController::class, 'update'])->middleware('role:super_admin');
     Route::delete('/lokasi/{lokasi}', [LokasiController::class, 'destroy'])->middleware('role:super_admin');
+
+    // panduan
+    Route::get('/panduan', [PanduanController::class, 'index'])->middleware('role:super_admin');
+    Route::get('/panduan/{panduan}/edit', [PanduanController::class, 'edit'])->middleware('role:super_admin');
+    Route::patch('/panduan/{panduan}', [PanduanController::class, 'update'])->middleware('role:super_admin');
 
     // suggestions
     Route::get('/suggestions', [ContactController::class, 'contactSuggestion'])->middleware('role:super_admin')->name('admin.suggestions');

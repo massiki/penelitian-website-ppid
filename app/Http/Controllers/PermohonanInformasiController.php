@@ -14,6 +14,7 @@ use App\Mail\NotifMengambil;
 use App\Mail\NotifTolakPermohonan;
 use App\Models\Rating;
 use App\Models\Reference;
+use App\Models\Panduan;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -41,8 +42,12 @@ class PermohonanInformasiController extends Controller
      */
     public function create()
     {
-        $getInformation = Reference::where('slug', 'memperoleh')->get();
-        $copyInformation = Reference::where('slug', 'mendapat')->get();
+        $getInformation = Cache::remember('reference_memperoleh', 60, function () {
+            return Reference::where('slug', 'memperoleh')->get();
+        });
+        $copyInformation = Cache::remember('reference_mendapat', 60, function () {
+            return Reference::where('slug', 'mendapat')->get();
+        });
         return view('user.formulir.form-permohonan', compact('getInformation', 'copyInformation'));
     }
 
@@ -265,6 +270,9 @@ class PermohonanInformasiController extends Controller
 
     public function guide()
     {
-        return view('user.formulir.panduan-permohonan');
+        $panduan = Cache::remember('panduan_permohonan_active', 60, function () {
+            return Panduan::where('slug', 'permohonan')->where('is_active', true)->firstOrFail();
+        });
+        return view('user.formulir.panduan-permohonan', compact('panduan'));
     }
 }

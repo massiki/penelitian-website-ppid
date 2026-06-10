@@ -118,7 +118,7 @@ class InformasiPublikController extends Controller
 
         $informations = Cache::remember(
             "information_{$reference->id}_page_" . (request('page', 1)),
-            $this->seconds ?? 60,
+            $this->seconds ?? $this->seconds,
             function () use ($reference) {
                 return InformasiPublik::where('kategori_informasi_id', $reference->id)
                     ->latest()
@@ -131,11 +131,11 @@ class InformasiPublikController extends Controller
 
     public function detail(string $id)
     {
-        $information = Cache::remember("informasi_publik_{$id}", 60, function () use ($id) {
+        $information = Cache::remember("informasi_publik_{$id}", $this->seconds, function () use ($id) {
             return InformasiPublik::find($id);
         });
 
-        $details = Cache::remember("informasi_publik_detail_{$id}_page_" . (request('page', 1)), 60, function () use ($id) {
+        $details = Cache::remember("informasi_publik_detail_{$id}_page_" . (request('page', 1)), $this->seconds, function () use ($id) {
             return InformasiPublikDetail::where('informasi_publik_id', $id)->latest()->paginate(10);
         });
         return view('user.informasipublik.detail', compact(['details', 'information']));
