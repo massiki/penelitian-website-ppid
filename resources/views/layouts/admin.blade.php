@@ -47,7 +47,7 @@
             {{ session('success') }}
           </strong>
           <button data-dismiss="toast" type="button" class="ml-2 mb-1 close" aria-label="Close">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">Ã—</span>
           </button>
         </div>
       </div>
@@ -64,7 +64,7 @@
             {{ session('failed') }}
           </strong>
           <button data-dismiss="toast" type="button" class="ml-2 mb-1 close" aria-label="Close">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">Ã—</span>
           </button>
         </div>
       </div>
@@ -146,8 +146,11 @@
     });
   </script>
 
+  @stack('scripts')
+
   @yield('grafic')
 
 </body>
 
 </html>
+

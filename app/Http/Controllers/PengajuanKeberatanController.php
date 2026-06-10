@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PengajuanKeberatan;
 use App\Models\PermohonanInformasi;
 use App\Models\Reference;
+use App\Models\Panduan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
@@ -158,6 +159,9 @@ class PengajuanKeberatanController extends Controller
 
     public function guide()
     {
-        return view('user.formulir.panduan-pengajuan');
+        $panduan = cache()->remember('panduan_pengajuan_active', 60, function () {
+            return Panduan::where('slug', 'pengajuan')->where('is_active', true)->firstOrFail();
+        });
+        return view('user.formulir.panduan-pengajuan', compact('panduan'));
     }
 }

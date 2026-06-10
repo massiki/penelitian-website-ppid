@@ -99,6 +99,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/panduan" class="nav-link {{ request()->is('panduan') || request()->is('panduan/*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-book-open"></i>
+              <p>Panduan</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/menu" class="nav-link {{ request()->is('menu') || request()->is('menu/*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-bars"></i>
               <p>Menu</p>
@@ -189,3 +195,4 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+
