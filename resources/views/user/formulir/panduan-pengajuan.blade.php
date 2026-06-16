@@ -4,7 +4,7 @@
   <div class="container py-5">
 
     {{-- Header --}}
-    <div class="text-center mb-5">
+    <div class="text-center mb-5 wow fadeInUp">
       <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 mb-3"
         style="font-weight: 500; letter-spacing: 0.3px;">PANDUAN</span>
       <h2 class="fw-bold mb-2" style="color: var(--colorblue2);">{{ $panduan->judul }}</h2>
@@ -15,13 +15,13 @@
 
     {{-- Media --}}
     <div class="row g-4 mb-5">
-      <div class="col-md-6">
+      <div class="col-md-6 wow fadeInLeft">
         <div class="rounded-3 overflow-hidden shadow-sm h-100">
           <img src="{{ $panduan->gambar ? asset('storage/' . $panduan->gambar) : asset('assets/img/sop-ppid.png') }}" alt="Panduan Pengajuan Keberatan"
             class="img-fluid w-100 h-100" style="object-fit: cover;">
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 wow fadeInRight">
         <div class="rounded-3 overflow-hidden shadow-sm h-100 bg-light d-flex align-items-center">
           <video class="w-100" controls style="aspect-ratio: 16 / 9;">
             <source src="{{ $panduan->video_url ?? 'https://ppid-simonik.bandung.go.id/assets/img/videomekanismepelayanan.mp4' }}" type="video/mp4">
@@ -36,7 +36,7 @@
       <div class="col-lg-8">
 
         {{-- Description --}}
-        <div class="mb-5">
+        <div class="mb-5 wow fadeInUp">
           <p class="text-muted" style="font-size: 1.05rem; line-height: 1.8;">
             {!! $panduan->deskripsi_konten !!}
           </p>
@@ -44,7 +44,7 @@
 
         {{-- Alasan Pengajuan Keberatan --}}
         @if ($panduan->persyaratan)
-        <div class="mb-5">
+        <div class="mb-5 wow fadeInUp">
           <div class="d-flex align-items-center gap-2 mb-3">
             <div style="width: 4px; height: 24px; background: var(--colorblue2); border-radius: 2px;"></div>
             <h4 class="fw-semibold mb-0" style="color: var(--colorblue2);">Alasan Pengajuan Keberatan</h4>
@@ -63,14 +63,16 @@
         {{-- Langkah-Langkah Pengajuan Keberatan --}}
         @if ($panduan->langkah)
         <div class="mb-5">
-          <div class="d-flex align-items-center gap-2 mb-3">
+          <div class="d-flex align-items-center gap-2 mb-3 wow fadeInUp">
             <div style="width: 4px; height: 24px; background: var(--colorblue2); border-radius: 2px;"></div>
             <h4 class="fw-semibold mb-0" style="color: var(--colorblue2);">Langkah-Langkah Pengajuan Keberatan</h4>
           </div>
 
           <div class="d-flex flex-column gap-3">
             @foreach ($panduan->langkah as $i => $step)
-              <div class="d-flex gap-3 p-4 rounded-3 border" style="background: #fafbfc; transition: all 0.2s ease;"
+              <div class="d-flex gap-3 p-4 rounded-3 border wow fadeInUp"
+                data-wow-delay="{{ 0.1 + $i * 0.1 }}s"
+                style="background: #fafbfc; transition: all 0.2s ease;"
                 onmouseover="this.style.background='#f0f4ff'; this.style.borderColor='#b3d4ff';"
                 onmouseout="this.style.background='#fafbfc'; this.style.borderColor='#dee2e6';">
                 <div
@@ -101,7 +103,7 @@
 
         {{-- Status Pengajuan Keberatan --}}
         @if ($panduan->status_list)
-        <div>
+        <div class="wow fadeInUp">
           <div class="d-flex align-items-center gap-2 mb-3">
             <div style="width: 4px; height: 24px; background: var(--colorblue2); border-radius: 2px;"></div>
             <h4 class="fw-semibold mb-0" style="color: var(--colorblue2);">Status Pengajuan Keberatan</h4>

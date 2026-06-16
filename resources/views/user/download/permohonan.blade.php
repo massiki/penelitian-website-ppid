@@ -2,17 +2,17 @@
 
 @section('content')
   @if ($information->file_acc_permohonan)
-    <div class="section-title text-center pt-5">
+    <div class="section-title text-center pt-5 wow fadeInUp">
       <h2>Download Permohonan</h2>
     </div>
-    <div class="col-12 col-lg-6 offset-lg-3 mb-5">
+    <div class="col-12 col-lg-6 offset-lg-3 mb-5 wow fadeInUp" data-wow-delay="0.1s">
       <div class="main-sidebar">
           <iframe src="/storage/{{ $information->file_acc_permohonan }}#toolbar=0" id="fileFrame" frameborder="0" style="pointer-events: none" class="w-100" height="500"></iframe>
         <div class="d-flex gap-3 mt-5">
           @if ($rating)
-            <button class="btn btn-primary w-100" onclick="downloadFile()">Unduh</button>
+            <button class="btn btn-primary w-100 animated pulse infinite" onclick="downloadFile()">Unduh</button>
           @else
-            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#rating">
+            <button type="button" class="btn btn-primary w-100 animated pulse infinite" data-bs-toggle="modal" data-bs-target="#rating">
               Unduh
             </button>
           @endif

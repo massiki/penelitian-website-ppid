@@ -2,10 +2,10 @@
 
 @section('content')
 
-  <div class="section-title text-center pt-5">
+  <div class="section-title text-center pt-5 wow fadeInUp">
     <h2>Riwayat Permohonan Informasi</h2>
   </div>
-  <div class="col-12 col-lg-6 offset-lg-3 pt-5 mt-5 mb-5 ">
+  <div class="col-12 col-lg-6 offset-lg-3 pt-5 mt-5 mb-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="main-sidebar">
       <div class="single-sidebar-widget ">
         <div class="text-center">
@@ -24,7 +24,7 @@
     <div class="accordion" id="accordionExample">
       @if ($information)
         @foreach ($information as $key => $item)
-          <div class="accordion-item">
+          <div class="accordion-item wow fadeInUp" data-wow-delay="{{ 0.1 + $key * 0.1 }}s">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed text-black" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapse{{ $key }}" aria-expanded="false"

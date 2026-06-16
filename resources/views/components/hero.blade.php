@@ -24,7 +24,7 @@
                   data-delay-in="0.6">{{ $infoBanner->deskripsi }}
                 </p>
                 <a href="{{ $infoBanner->url }}" data-animation-in="fadeInRight" data-delay-in="0.9"
-                  class="theme-btn me-sm-4 mt-4 animated">{{ $infoBanner->nama_button }}</a>
+                  class="theme-btn me-sm-4 mt-4 animated btn-pulse-infinite">{{ $infoBanner->nama_button }}</a>
               </div>
             </div>
           </div>
