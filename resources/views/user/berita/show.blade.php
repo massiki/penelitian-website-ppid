@@ -6,7 +6,7 @@
       <div class="row">
         {{-- layout kiri --}}
         <div class="col-12 col-lg-8">
-          <div class="blog-post-details border-wrap">
+          <div class="blog-post-details border-wrap wow fadeInUp">
             <div class="single-blog-post post-details">
               <div class="post-content">
                 <h1><strong>{{ $item->judul }}</strong></h1>
@@ -24,7 +24,7 @@
         {{-- layout kanan --}}
         <div class="col-12 col-lg-4">
           <div class="main-sidebar">
-            <div class="single-sidebar-widget">
+            <div class="single-sidebar-widget wow fadeInUp" data-wow-delay="0.1s">
               <div class="wid-title">
                 <h3>Cari</h3>
               </div>
@@ -35,7 +35,7 @@
                 </form>
               </div>
             </div>
-            <div class="single-sidebar-widget">
+            <div class="single-sidebar-widget wow fadeInUp" data-wow-delay="0.2s">
               <div class="wid-title">
                 <h3>Berita Populer</h3>
               </div>
@@ -53,7 +53,7 @@
                 @endforeach
               </div>
             </div>
-            <div class="single-sidebar-widget">
+            <div class="single-sidebar-widget wow fadeInUp" data-wow-delay="0.3s">
               <div class="wid-title">
                 <h3>Sosial Media</h3>
               </div>

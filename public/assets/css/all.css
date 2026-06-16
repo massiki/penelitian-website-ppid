@@ -284,3 +284,8 @@ select,
     visibility: visible !important;
   }
 }
+
+/* pulse infinite without affecting other animations */
+.btn-pulse-infinite {
+  animation: pulse 2s infinite;
+}

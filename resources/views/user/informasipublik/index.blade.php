@@ -4,12 +4,12 @@
   <div class="container">
     <div class="row pt-5">
       <div class="col-12 text-center">
-        <div class="section-title">
+        <div class="section-title wow fadeInUp">
           <h2>Informasi {{ $informations->first()->informasi->nama  ?? '' }}</h2>
         </div>
       </div>
     </div>
-    <div class="card-body table-responsive p-0 mb-3">
+    <div class="card-body table-responsive p-0 mb-3 wow fadeInUp" data-wow-delay="0.1s">
       <table class="table text-center border table-responsive-card">
         <thead class="table-dark">
           <tr>

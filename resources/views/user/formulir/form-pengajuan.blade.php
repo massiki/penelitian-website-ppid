@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row pt-5">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
         <a href="{{ route('panduan.permohonan') }}">
           <div class="single-contact-card card1">
             <div class="top-part">
@@ -28,7 +28,7 @@
           </div>
         </a>
       </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
         <a href="{{ route('panduan.pengajuan') }}">
           <div class="single-contact-card card2">
             <div class="top-part">
@@ -56,12 +56,12 @@
     </div>
     <div class="row pt-5">
       <div class="col-12 text-center">
-        <div class="section-title">
+        <div class="section-title wow fadeInUp">
           <h2>Formulir Pengajuan Keberatan Informasi</h2>
         </div>
       </div>
 
-      <div class="col-12 col-lg-12">
+      <div class="col-12 col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
         <div class="contact-form">
           <form action="/pengajuan/create" class="row" id="contact-form" method="POST">
             @csrf
@@ -150,7 +150,7 @@
               </div>
             </div>
             <div class="col-md-12 col-12 text-center">
-              <button class="submit-btn mb-5" type="submit">Kirim</button>
+              <button class="submit-btn mb-5 animated pulse infinite" type="submit">Kirim</button>
             </div>
           </form>
         </div>

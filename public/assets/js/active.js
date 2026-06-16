@@ -96,16 +96,17 @@
                 speed: 800,
                 responsive: [
                     {
-                      breakpoint: 768,
+                      breakpoint: 991,
                       settings: {
                         slidesToShow: 1,
-                        center: true,
+                        slidesToScroll: 1,
                       }
                     },
                     {
                       breakpoint: 480,
                       settings: {
-                        slidesToShow: 1
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
                       }
                     }
                 ],
