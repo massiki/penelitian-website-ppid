@@ -14,6 +14,7 @@ use App\Mail\NotifMengambil;
 use App\Mail\NotifTolakPermohonan;
 use App\Models\Rating;
 use App\Models\Reference;
+use App\Models\Panduan;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -41,8 +42,12 @@ class PermohonanInformasiController extends Controller
      */
     public function create()
     {
-        $getInformation = Reference::where('slug', 'memperoleh')->get();
-        $copyInformation = Reference::where('slug', 'mendapat')->get();
+        $getInformation = Cache::remember('reference_memperoleh', 60, function () {
+            return Reference::where('slug', 'memperoleh')->get();
+        });
+        $copyInformation = Cache::remember('reference_mendapat', 60, function () {
+            return Reference::where('slug', 'mendapat')->get();
+        });
         return view('user.formulir.form-permohonan', compact('getInformation', 'copyInformation'));
     }
 
@@ -132,7 +137,7 @@ class PermohonanInformasiController extends Controller
         $file_org =  $file->getClientOriginalName();
         $randomName = Str::random(5);
         $file_name = $randomName . '-' . $file_org;
-        $file_path = $file->storeAs('file_acc', $file_name, 'public');
+        $file_path = $file->storeAs('file_acc', $file_name, 'local');
 
         // dd($permohonanInformasi->mendapatkan_salinan_informasi_id);
 
@@ -199,8 +204,8 @@ class PermohonanInformasiController extends Controller
     public function destroy(PermohonanInformasi $permohonanInformasi)
     {
         $file_name = $permohonanInformasi->file_ktp;
-        if ($file_name && Storage::disk('public')->exists($file_name)) {
-            Storage::disk('public')->delete($file_name);
+        if ($file_name && Storage::disk('local')->exists($file_name)) {
+            Storage::disk('local')->delete($file_name);
         }
         $permohonanInformasi->delete();
         return redirect('/permohonan_informasi')->with('success', 'Data berhasil dihapus');
@@ -265,6 +270,9 @@ class PermohonanInformasiController extends Controller
 
     public function guide()
     {
-        return view('user.formulir.panduan-permohonan');
+        $panduan = Cache::remember('panduan_permohonan_active', 60, function () {
+            return Panduan::where('slug', 'permohonan')->where('is_active', true)->firstOrFail();
+        });
+        return view('user.formulir.panduan-permohonan', compact('panduan'));
     }
 }

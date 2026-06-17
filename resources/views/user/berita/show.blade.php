@@ -6,13 +6,14 @@
       <div class="row">
         {{-- layout kiri --}}
         <div class="col-12 col-lg-8">
-          <div class="blog-post-details border-wrap">
+          <div class="blog-post-details border-wrap wow fadeInUp">
             <div class="single-blog-post post-details">
               <div class="post-content">
                 <h1><strong>{{ $item->judul }}</strong></h1>
                 <div class="post-meta">
                   <span>
-                    <i class="fal fa-calendar-alt"></i>{{ $item->created_at->locale('id')->translatedFormat('H:i, l, d F Y') }}
+                    <i
+                      class="fal fa-calendar-alt"></i>{{ $item->created_at->locale('id')->translatedFormat('H:i, l, d F Y') }}
                   </span>
                 </div>
                 <img class="w-100" src="/storage/{{ $item->image }}" alt="{{ $item->image }}">
@@ -24,18 +25,18 @@
         {{-- layout kanan --}}
         <div class="col-12 col-lg-4">
           <div class="main-sidebar">
-            <div class="single-sidebar-widget">
+            <div class="single-sidebar-widget wow fadeInUp" data-wow-delay="0.1s">
               <div class="wid-title">
                 <h3>Cari</h3>
               </div>
               <div class="search_widget">
                 <form action="/berita" method="get">
                   <input type="text" name="search" placeholder="Cari Berita..." value="{{ request('search') }}">
-                  <button type="submit"><i class="fal fa-search"></i></button>
+                  <button type="submit" aria-label="Cari berita"><i class="fal fa-search"></i></button>
                 </form>
               </div>
             </div>
-            <div class="single-sidebar-widget">
+            <div class="single-sidebar-widget wow fadeInUp" data-wow-delay="0.2s">
               <div class="wid-title">
                 <h3>Berita Populer</h3>
               </div>
@@ -53,7 +54,7 @@
                 @endforeach
               </div>
             </div>
-            <div class="single-sidebar-widget">
+            <div class="single-sidebar-widget wow fadeInUp" data-wow-delay="0.3s">
               <div class="wid-title">
                 <h3>Sosial Media</h3>
               </div>

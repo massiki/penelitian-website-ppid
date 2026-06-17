@@ -8,7 +8,7 @@
       </div>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">contact Us</li>
         </ol>
       </nav>
@@ -19,13 +19,13 @@
     <div class="container">
       <div class="row pt-5">
         <div class="col-12 col-xl-8 offset-xl-2 text-center">
-          <div class="section-title">
+          <div class="section-title wow fadeInUp">
             <span>{{ config('app.name') }}</span>
             <h2>Contact Us</h2>
           </div>
         </div>
 
-        <div class="col-12 col-lg-12">
+        <div class="col-12 col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
           <div class="contact-form">
             @if (session('success'))
               <div class="alert alert-success">
@@ -84,7 +84,7 @@
                 </div>
               </div>
               <div class="col-md-12 col-12 text-center">
-                <button class="submit-btn mb-5 mt-4" type="submit">Kirim</button>
+                <button class="submit-btn mb-5 mt-4 animated pulse infinite" type="submit">Kirim</button>
               </div>
             </form>
           </div>

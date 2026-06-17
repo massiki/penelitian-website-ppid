@@ -6,14 +6,14 @@
   <section class="our-service-wrapper section-padding">
     <div class="container">
       <div class="col-12 col-xl-6 offset-xl-3 text-center">
-				<div class="section-title">
-					<span>{{ config('app.name') }}</span>
-					<h2>Informasi Publik</h2>
-				</div>
-			</div>
+        <div class="section-title wow fadeInUp">
+          <span>{{ config('app.name') }}</span>
+          <h2>Informasi Publik</h2>
+        </div>
+      </div>
       <div class="row ps-xl-5 pe-xl-5">
-        @foreach ($cards as $item )
-          <div class="col-xl-3 col-md-6 col-12">
+        @foreach ($cards as $index => $item)
+          <div class="col-xl-3 col-md-6 col-12 wow fadeInUp" data-wow-delay="{{ 0.1 + $index * 0.1 }}s">
             <div class="single-service-box">
               <div class="icon">
                 <img src="/storage/{{ $item->icon }}" alt="{{ $item->judul }}" height="100">
@@ -31,18 +31,18 @@
   <section class="about-wrapper section-padding pt-0">
     <div class="container">
       <div class="row">
-        <div class="col-xl-6 col-12">
+        <div class="col-xl-6 col-12 wow fadeInLeft">
           <div class="about-images-video-popup mb-5 mb-md-0">
             @foreach ($thumbnail as $index => $item)
-              <img src="/storage/{{ $item->image }}" alt="{{ $item->image }}" width="{{ $index == 0 ? '600' : '380' }}">
+              <img src="/storage/{{ $item->image }}" alt="{{ $item->image }}"
+                class="about-img-{{ $index === 0 ? 'main' : 'overlay' }}">
             @endforeach
             <div class="video-play-btn">
-              <a href="{{ $video->url }}" class="popup-video play-video"><i
-                  class="fas fa-play"></i></a>
+              <a href="{{ $video->url }}" class="popup-video play-video"><i class="fas fa-play"></i></a>
             </div>
           </div>
         </div>
-        <div class="col-xl-6 col-12 ps-xl-5">
+        <div class="col-xl-6 col-12 ps-xl-5 wow fadeInRight">
           <div class="section-title">
             <span>{{ config('app.name') }}</span>
             <h2>Layanan Informasi yang Mudah dan Transparan</h2>
@@ -51,8 +51,8 @@
               meningkatkan transparansi dan kualitas layanan.</p>
           </div>
           <div class="row">
-            @foreach ($infoServices as $item)
-              <div class="col-md-6 col-sm-6">
+            @foreach ($infoServices as $index => $item)
+              <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="{{ 0.1 + $index * 0.1 }}s">
                 <div class="info-icon-item">
                   <img src="/storage/{{ $item->icon }}" alt="{{ $item->judul }}" height="100">
                   <h3>{{ $item->judul }}</h3>
@@ -72,12 +72,12 @@
     <div class="shape-bottom"><img src="assets/img/left-bottom-shape.png" alt=""></div>
     <div class="container">
       <div class="row">
-        <div class="col-xl-6 col-12 mb-5 mb-xl-0">
+        <div class="col-xl-6 col-12 mb-5 mb-xl-0 wow fadeInLeft">
           <div class="faq-img">
             <img src="/storage/{{ $questAnswers->image }}" alt="q&a">
           </div>
         </div>
-        <div class="col-xl-6 col-12 ps-xl-5">
+        <div class="col-xl-6 col-12 ps-xl-5 wow fadeInRight">
           <div class="section-title">
             <span>{{ config('app.name') }}</span>
             <h2>Pertanyaan yang sering ditanyakan</h2>
@@ -109,7 +109,7 @@
   <section class="testimonial-carousel-wrapper section-padding">
     <div class="container">
       <div class="col-12 col-xl-8 offset-xl-2 text-center">
-        <div class="section-title">
+        <div class="section-title wow fadeInUp">
           <span>{{ config('app.name') }}</span>
           <h2>Rating</h2>
         </div>
@@ -140,7 +140,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-          <div class="section-title">
+          <div class="section-title wow fadeInUp">
             <span>{{ config('app.name') }}</span>
             <h2>Berita</h2>
           </div>
@@ -148,11 +148,12 @@
       </div>
 
       <div class="row">
-        @foreach ($news as $item)
-          <div class="col-xl-4 col-md-6">
+        @foreach ($news as $index => $item)
+          <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-delay="{{ 0.1 + $index * 0.15 }}s">
             <div class="single-blog-item">
               <a href="{{ $item->url }}">
-                <div class="post-featured-thumb bg-cover" style="background-image: url('/storage/{{ $item->image }}')"></div>
+                <div class="post-featured-thumb bg-cover" style="background-image: url('/storage/{{ $item->image }}')">
+                </div>
               </a>
               <div class="content">
                 <h3><a href="{{ $item->url }}">{{ $item->judul }}</a></h3>
@@ -170,5 +171,4 @@
       </div>
     </div>
   </section>
-  
 @endsection

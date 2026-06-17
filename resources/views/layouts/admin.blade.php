@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ config('app.name') }}</title>
 
-  <link rel="shortcut icon" href="/storage/{{App\Models\BackgroundImage::where('slug','logo')->latest()->first()->image}}">
+  <link rel="shortcut icon"
+    href="/storage/{{ App\Models\BackgroundImage::where('slug', 'logo')->latest()->first()->image }}">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -47,7 +48,7 @@
             {{ session('success') }}
           </strong>
           <button data-dismiss="toast" type="button" class="ml-2 mb-1 close" aria-label="Close">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">Ã—</span>
           </button>
         </div>
       </div>
@@ -59,12 +60,12 @@
     <div class="toasts-top-right fixed">
       <div class="toast bg-danger fade show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <strong class="mr-auto"> 
-            <i class="nav-icon fas fa-times"></i> 
+          <strong class="mr-auto">
+            <i class="nav-icon fas fa-times"></i>
             {{ session('failed') }}
           </strong>
           <button data-dismiss="toast" type="button" class="ml-2 mb-1 close" aria-label="Close">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">Ã—</span>
           </button>
         </div>
       </div>
@@ -145,6 +146,8 @@
       });
     });
   </script>
+
+  @stack('scripts')
 
   @yield('grafic')
 

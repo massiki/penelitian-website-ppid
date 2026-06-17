@@ -4,12 +4,12 @@
   <div class="container" style="overflow-x:auto;">
     <div class="row pt-5">
       <div class="col-12 text-center">
-        <div class="section-title">
+        <div class="section-title wow fadeInUp">
           <h2>Detail Informasi {{ $information->informasi->nama ?? '' }}</h2>
         </div>
       </div>
     </div>
-    <div class="row mb-4">
+    <div class="row mb-4 wow fadeInUp" data-wow-delay="0.1s">
       <div class="col-12">
         <div class="p-4 border border-dark-subtle">
           <h3>Ringkasan</h3>
@@ -17,14 +17,14 @@
         </div>
       </div>
     </div>
-    <div class="card-body table-responsive p-0 mb-3">
+    <div class="card-body table-responsive p-0 mb-3 wow fadeInUp" data-wow-delay="0.2s">
       <table class="table text-center border">
         <thead class="table-dark">
           <tr>
-            <th class="align-middle border" >No.</th>
-            <th class="align-middle border" >Informasi</th>
-            <th class="align-middle border" >Tahun</th>
-            <th class="align-middle border" >Link</th>
+            <th class="align-middle border">No.</th>
+            <th class="align-middle border">Informasi</th>
+            <th class="align-middle border">Tahun</th>
+            <th class="align-middle border">Link</th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
               <td class="text-start align-middle border">{{ $item->informasi }}</td>
               <td class="align-middle border">{{ $item->tahun }}</td>
               <td class="align-middle border">
-                <a href="/storage/{{ $item->link }}" class="btn btn-info" target="_black">
+                <a href="/storage/{{ $item->link }}" class="btn btn-info" target="_blank" aria-label="Download file">
                   <i class="nav-icon fas fa-download"></i>
                 </a>
               </td>

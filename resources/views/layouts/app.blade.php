@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <!-- ========== Meta Tags ========== -->
@@ -34,6 +34,8 @@
 
 <body class="body-wrapper">
 
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+
   {{-- alert success --}}
   @if (session('success'))
     <div class="container position-fixed top-50 start-50 translate-middle p-2 text-center" style="z-index: 1050;">
@@ -63,7 +65,7 @@
 
   @include('components.nav')
 
-  @yield('content')
+  <main id="main-content">@yield('content')</main>
 
   @include('components.footer')
 
@@ -90,6 +92,17 @@
   <script src="{{ asset('assets/js/nice-select2.js') }}"></script>
   <script src="{{ asset('assets/js/active.js') }}"></script>
   <script src="{{ asset('assets/js/app.js') }}"></script>
+  <script>
+    document.querySelectorAll('form').forEach(function(form) {
+      form.addEventListener('submit', function() {
+        var btn = this.querySelector('.submit-btn, .theme-btn[type="submit"], button[type="submit"]');
+        if (btn) {
+          btn.classList.add('loading');
+          btn.disabled = true;
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
